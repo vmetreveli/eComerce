@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{233AECEB-CE0A-476F-929B-2867F9613AFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{46C4FBF3-D92B-489B-8833-57987BDD457A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.API", "Microservices\Catalog\Catalog.API\Catalog.API.csproj", "{06849358-1965-4D1B-87CB-8558D6F9CE7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06849358-1965-4D1B-87CB-8558D6F9CE7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06849358-1965-4D1B-87CB-8558D6F9CE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06849358-1965-4D1B-87CB-8558D6F9CE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06849358-1965-4D1B-87CB-8558D6F9CE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46C4FBF3-D92B-489B-8833-57987BDD457A} = {233AECEB-CE0A-476F-929B-2867F9613AFD}
+		{06849358-1965-4D1B-87CB-8558D6F9CE7A} = {46C4FBF3-D92B-489B-8833-57987BDD457A}
+	EndGlobalSection
+EndGlobal
