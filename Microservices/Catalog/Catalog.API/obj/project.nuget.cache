@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "q8++Tt2eFTwaadNg/CopFKi7RPvJEIf8d5ip2Jzn6hW32pBWWkt0Aiu5rRqWhvFo0We+ARTBkVfoeCxbuzxWLg==",
+  "dgSpecHash": "f/4BfJLbeyi+5geTsE01kYT9ERVq9GcsEZoWQqRM/1r6VqKUW8hAuTP9F/XUbgaI6fA7tcF+4eQyQ7q49iWh+g==",
   "success": true,
   "projectFilePath": "/Users/vmetreveli/Library/Mobile Documents/com~apple~CloudDocs/Projects/AspCore/eComerce/Microservices/Catalog/Catalog.API/Catalog.API.csproj",
   "expectedPackageFiles": [

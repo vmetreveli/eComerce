@@ -1,7 +1,8 @@
+using Catalog.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Catalog.API
+namespace API
 {
     public static class Program
     {
