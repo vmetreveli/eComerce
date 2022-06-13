@@ -1,11 +1,18 @@
+using Catalog.Application;
 using Catalog.API.Data;
+using Catalog.API.Middleware;
 using Catalog.API.Repositories;
+using Catalog.Application.Behaviors;
+using Catalog.Data;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+
 
 namespace Catalog.API;
 
@@ -19,10 +26,29 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+        services.AddAutoMapper(typeof(Startup).Assembly);
+
+        services.AddMediatR(typeof(AssemblyReference).Assembly);
+
+
+
+        services.Configure<DatabaseSettings>(
+            Configuration.GetSection("DatabaseSettings"));
+
+        services.AddSingleton<CatalogContext>();
+
+
+
         services.AddScoped<ICatalogContext, CatalogContext>();
         services.AddScoped<IProductRepository, ProductRepository>();
 
-        services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Catalog.API", Version = "v1"}); });
+        /* Validation */
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
+
+        services.AddTransient<ExceptionHandlingMiddleware>();
+
+        services.AddSwaggerGen(c => { c.SwaggerDoc("v2", new OpenApiInfo {Title = "Catalog.API", Version = "v2"}); });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,9 +56,10 @@ public class Startup
     {
         if (env.IsDevelopment())
         {
+
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v2"));
         }
 
         app.UseHttpsRedirection();
