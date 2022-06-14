@@ -46,6 +46,44 @@ public static class ServiceExtensions
             // for further customization
             //options.OperationFilter<DefaultValuesFilter>();
             //  options.OperationFilter<SwaggerLanguageHeader>();
+            // options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            // {
+            //     Type = SecuritySchemeType.OAuth2,
+            //     Flows = new OpenApiOAuthFlows
+            //     {
+            //
+            //         Password = new OpenApiOAuthFlow
+            //         {
+            //             // AuthorizationUrl = new Uri("https://localhost:5443/connect/authorize"),
+            //             // TokenUrl = new Uri("https://localhost:5443/connect/token"),
+            //             //  AuthorizationUrl = new Uri($"{_configuration.GetValue<string>("IdentityProviderBaseUrl")}/connect/authorize"),
+            //             TokenUrl = new Uri(
+            //                 $"{_configuration.GetValue<string>("IdentityProviderBaseUrl")}/connect/token"),
+            //             Scopes = new Dictionary<string, string>
+            //             {
+            //                 // {"HandbookAPI", "Demo API - full access"},
+            //                 //
+            //                 // {"HandbookAPI.read", "Demo API - read access"},
+            //                 //
+            //                 // {"HandbookAPI.write", "Demo API - write access"}
+            //             }
+            //         }
+            //     }
+            // });
+            //
+            // options.OperationFilter<AuthorizeCheckOperationFilter>();
+        });
+
+        return services;
+    } private static IServiceCollection AddSwaggerVersioningWithAuth(this IServiceCollection services)
+    {
+
+
+        services.ConfigureOptions<ConfigureSwaggerOptions>().AddSwaggerGen(options =>
+        {
+            // for further customization
+            //options.OperationFilter<DefaultValuesFilter>();
+            //  options.OperationFilter<SwaggerLanguageHeader>();
             options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.OAuth2,

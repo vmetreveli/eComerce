@@ -25,7 +25,7 @@ public class ConfigureSwaggerOptions : IConfigureNamedOptions<SwaggerGenOptions>
     {
         var info = new OpenApiInfo
         {
-            Title = "HandBook API",
+            Title = "API",
             Version = description.ApiVersion.ToString()
         };
 

@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SwaggerHandbook.Core;
-
 
 namespace Catalog.API;
 
@@ -19,7 +17,6 @@ public class Startup
     {
         if (env.EnvironmentName == "Debug") app.UseDeveloperExceptionPage();
 
-        //app.UseSwaggerWithVersioning();
         app.UseHttpsRedirection();
         app.UseMiddleware<ExceptionHandlingMiddleware>();
         app.UseRequestLocalization();

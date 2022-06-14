@@ -6,7 +6,7 @@ using Catalog.Application.Exceptions;
 using Catalog.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using ApplicationException =  Catalog.Domain.Exceptions.ApplicationException;
+using ApplicationException = Catalog.Domain.Exceptions.ApplicationException;
 
 namespace Catalog.API.Middleware;
 

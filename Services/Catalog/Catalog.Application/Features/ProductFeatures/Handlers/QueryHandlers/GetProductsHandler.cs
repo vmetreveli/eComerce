@@ -12,8 +12,8 @@ namespace Catalog.Application.Features.ProductFeatures.Handlers.QueryHandlers;
 
 public class GetProductsHandler : IQueryHandler<GetProductsQuery, IEnumerable<ProductDto>>
 {
-    private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
+    private readonly IProductRepository _productRepository;
 
     public GetProductsHandler(IProductRepository productRepository, IMapper mapper)
     {

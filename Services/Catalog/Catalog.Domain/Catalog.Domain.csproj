@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-         <LangVersion>10</LangVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
 
   <ItemGroup>
-  <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
   </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Interfaces" />
-    </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="Models\.DS_Store" />
-    </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\.DS_Store"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="MongoDB.Bson" Version="2.16.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.16.0"/>
+  </ItemGroup>
 
 </Project>

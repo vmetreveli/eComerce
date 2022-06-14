@@ -22,7 +22,7 @@ public class ProductRepository : IProductRepository
             .Find(p => true)
             .ToListAsync(cancellationToken);
 
-    public async Task<Product> GetProduct(string id,CancellationToken cancellationToken) =>
+    public async Task<Product> GetProduct(string id, CancellationToken cancellationToken) =>
         await _context
             .Products
             .Find(p => p.Id == id)
@@ -38,7 +38,8 @@ public class ProductRepository : IProductRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<Product>> GetProductByCategory(string categoryName,CancellationToken cancellationToken)
+    public async Task<IEnumerable<Product>> GetProductByCategory(string categoryName,
+        CancellationToken cancellationToken)
     {
         var filter = Builders<Product>.Filter.Eq(p => p.Category, categoryName);
 

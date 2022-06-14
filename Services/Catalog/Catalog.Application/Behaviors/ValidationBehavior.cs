@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using ValidationException = Catalog.Application.Exceptions.ValidationException;
+
 namespace Catalog.Application.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>

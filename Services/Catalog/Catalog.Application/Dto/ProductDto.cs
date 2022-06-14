@@ -10,4 +10,3 @@ public class ProductDto
     public string ImageFile { get; set; }
     public decimal Price { get; set; }
 }
-
