@@ -2,8 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-      <RootNamespace>Catalog.Data</RootNamespace>
-      <LangVersion>10</LangVersion>
+           <LangVersion>10</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,6 +14,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Basket\Catalog.Domain\Catalog.Domain.csproj" />
+      <ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Catalog.Domain">
+        <HintPath>..\Catalog.Application\bin\Debug\net5.0\Catalog.Domain.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

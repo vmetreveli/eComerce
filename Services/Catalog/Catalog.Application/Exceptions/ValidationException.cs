@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Catalog.Domain.Exceptions;
 
 namespace Catalog.Application.Exceptions;

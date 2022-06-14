@@ -3,8 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.API.Entities;
-using Catalog.API.Repositories;
 using Catalog.Application.Features.ProductFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,23 +16,26 @@ public class CatalogController : ControllerBase
 {
     private readonly ILogger<CatalogController> _logger;
 
+    //TODO
+    //Need refactoring
     private readonly IMediator _mediator;
 
-
-
-    public CatalogController(IMediator mediator) =>
-        _mediator = mediator;
+    public CatalogController(ILogger<CatalogController> logger, IMediator mediator)
+    {
+        _logger = logger ?? throw new ArgumentException(nameof(logger));
+        _mediator = mediator ?? throw new ArgumentException(nameof(mediator));
+    }
 
     [HttpGet]
     [ProducesResponseType((int) HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
     {
-        var products =  await _mediator.Send(new GetProductsQuery(), cancellationToken);
+        var products = await _mediator.Send(new GetProductsQuery(), cancellationToken);
         if (products.Any()) return Ok(products);
         return NotFound();
     }
-    //
+
     // [HttpGet("{id:length(24)}", Name = "GetProduct")]
     // [ProducesResponseType((int) HttpStatusCode.NotFound)]
     // [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]

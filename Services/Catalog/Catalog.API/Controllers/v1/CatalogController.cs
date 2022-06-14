@@ -1,14 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
-using Catalog.API.Entities;
-using Catalog.API.Repositories;
+using Catalog.Domain.Interfaces.Repository;
+using Catalog.Domain.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace API.Controllers;
+namespace Catalog.API.Controllers.v1;
 
 [ApiController]
 [Route("api/v1/[controller]")]
@@ -29,9 +29,9 @@ public class CatalogController : ControllerBase
     [HttpGet]
     [ProducesResponseType((int) HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> GetProducts()
+    public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
     {
-        var products = await _repository.GetProducts();
+        var products = await _repository.GetProducts(cancellationToken);
         if (products.Any()) return Ok(products);
         return NotFound();
     }
@@ -39,9 +39,9 @@ public class CatalogController : ControllerBase
     [HttpGet("{id:length(24)}", Name = "GetProduct")]
     [ProducesResponseType((int) HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> GetProductById(string id)
+    public async Task<IActionResult> GetProductById(string id,CancellationToken cancellationToken)
     {
-        var product = await _repository.GetProduct(id);
+        var product = await _repository.GetProduct(id,cancellationToken);
         if (product == null)
         {
             _logger.LogError($"Product with id: {id}, not found.");
@@ -55,29 +55,29 @@ public class CatalogController : ControllerBase
     [HttpGet]
     [ProducesResponseType((int) HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> GetProductByCategory(string category)
+    public async Task<IActionResult> GetProductByCategory(string category,CancellationToken cancellationToken)
     {
-        var products = await _repository.GetProductByCategory(category);
+        var products = await _repository.GetProductByCategory(category,cancellationToken);
         if (products.Any()) return Ok(products);
         return NotFound();
     }
 
     [HttpPost]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> CreateProduct([FromBody] Product product)
+    public async Task<IActionResult> CreateProduct([FromBody] Product product,CancellationToken cancellationToken)
     {
-        await _repository.CreateProduct(product);
+        await _repository.CreateProduct(product,cancellationToken);
 
         return CreatedAtRoute("GetProduct", new {id = product.Id}, product);
     }
 
     [HttpPut]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdateProduct([FromBody] Product product) =>
-        Ok(await _repository.UpdateProduct(product));
+    public async Task<IActionResult> UpdateProduct([FromBody] Product product,CancellationToken cancellationToken) =>
+        Ok(await _repository.UpdateProduct(product,cancellationToken));
 
     [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> DeleteProductById(string id) =>
-        Ok(await _repository.DeleteProduct(id));
+    public async Task<IActionResult> DeleteProductById(string id,CancellationToken cancellationToken) =>
+        Ok(await _repository.DeleteProduct(id,cancellationToken));
 }

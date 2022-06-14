@@ -1,6 +1,6 @@
 using AutoMapper;
-using Catalog.API.Entities;
 using Catalog.Application.Dto;
+using Catalog.Domain.Models.Entities;
 
 namespace Catalog.API;
 
