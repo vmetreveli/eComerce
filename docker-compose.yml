@@ -4,7 +4,7 @@ services:
   catalogdb:
     image: mongo
 
-    basketdb:
+  basketdb:
       image: redis
   #
   #  discountdb:
