@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Basket.API.Data;
+namespace Basket.Data.Context;
 
 public class CatalogContext : IBasketContext
 {
