@@ -10,5 +10,8 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<ShoppingCartDto, ShoppingCart>();
         CreateMap<ShoppingCart, ShoppingCartDto>();
+
+        CreateMap<ShoppingCartItemDto, ShoppingCartItem>();
+        CreateMap<ShoppingCartItem, ShoppingCartItemDto>();
     }
 }
