@@ -1,3 +1,4 @@
+using Basket.API.Middleware;
 using Basket.Data.Repositories;
 using Basket.Domain.Interfaces.Repository;
 using Catalog.Application;
@@ -28,6 +29,10 @@ public static class DependencyContainer
             c.SwaggerDoc("v1", new OpenApiInfo
                 {Title = "Basket.API", Version = "v1"});
         });
+
+        services.AddTransient<ExceptionHandlingMiddleware>();
+
+        //services.AddSerilogServices(configuration);
 
         #region Repositories
 
