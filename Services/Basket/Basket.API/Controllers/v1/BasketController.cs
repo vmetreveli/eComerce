@@ -17,7 +17,7 @@ public class BasketController : ControllerBase
     private readonly IMediator _mediator;
 
     public BasketController(IMediator mediator) =>
-        _mediator = mediator ?? throw new ArgumentException(nameof(mediator));
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
     [HttpGet("{userName}", Name = "GetBasket")]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]

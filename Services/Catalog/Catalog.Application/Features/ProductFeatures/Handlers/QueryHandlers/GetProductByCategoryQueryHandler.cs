@@ -11,12 +11,12 @@ using Catalog.Domain.Interfaces.Repository;
 
 namespace Catalog.Application.Features.ProductFeatures.Handlers.QueryHandlers;
 
-public class GetProductByCategoryHandler : IQueryHandler<GetProductByCategoryQuery, IEnumerable<ProductDto>>
+public class GetProductByCategoryQueryHandler : IQueryHandler<GetProductByCategoryQuery, IEnumerable<ProductDto>>
 {
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
 
-    public GetProductByCategoryHandler(IProductRepository productRepository, IMapper mapper)
+    public GetProductByCategoryQueryHandler(IProductRepository productRepository, IMapper mapper)
     {
         _productRepository = productRepository;
         _mapper = mapper;

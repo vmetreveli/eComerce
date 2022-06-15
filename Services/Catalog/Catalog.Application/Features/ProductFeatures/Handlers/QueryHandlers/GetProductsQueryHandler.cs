@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -6,16 +7,17 @@ using AutoMapper;
 using Catalog.Application.Abstractions.Messaging;
 using Catalog.Application.Dto;
 using Catalog.Application.Features.ProductFeatures.Queries;
+using Catalog.Domain.Exceptions;
 using Catalog.Domain.Interfaces.Repository;
 
 namespace Catalog.Application.Features.ProductFeatures.Handlers.QueryHandlers;
 
-public class GetProductsHandler : IQueryHandler<GetProductsQuery, IEnumerable<ProductDto>>
+public class GetProductsQueryHandler : IQueryHandler<GetProductsQuery, IEnumerable<ProductDto>>
 {
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
 
-    public GetProductsHandler(IProductRepository productRepository, IMapper mapper)
+    public GetProductsQueryHandler(IProductRepository productRepository, IMapper mapper)
     {
         _productRepository = productRepository;
         _mapper = mapper;
@@ -28,8 +30,8 @@ public class GetProductsHandler : IQueryHandler<GetProductsQuery, IEnumerable<Pr
 
         var res = products.Select(i => _mapper.Map<ProductDto>(i));
 
-        // if (!res.Any())
-        //     throw new CityNotFoundException(request.Name);
+        if (!res.Any())
+            throw new ProductNotFoundException(string.Empty);
 
         return res;
     }

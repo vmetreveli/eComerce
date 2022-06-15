@@ -24,7 +24,7 @@ public class CatalogController : ControllerBase
     public CatalogController(ILogger<CatalogController> logger, IMediator mediator)
     {
         _logger = logger ?? throw new ArgumentException(nameof(logger));
-        _mediator = mediator ?? throw new ArgumentException(nameof(mediator));
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     [HttpGet]
