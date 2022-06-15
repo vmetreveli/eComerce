@@ -8,12 +8,12 @@ using Basket.Domain.Interfaces.Repository;
 
 namespace Basket.Application.Features.ProductFeatures.Handlers.QueryHandlers;
 
-public class GetBasketHandler : IQueryHandler<GetBasketQuery, ShoppingCartDto>
+public class GetBasketQueryHandler : IQueryHandler<GetBasketQuery, ShoppingCartDto>
 {
     private readonly IBasketRepository _basketRepository;
     private readonly IMapper _mapper;
 
-    public GetBasketHandler(IBasketRepository basketRepository, IMapper mapper)
+    public GetBasketQueryHandler(IBasketRepository basketRepository, IMapper mapper)
     {
         _basketRepository = basketRepository;
         _mapper = mapper;
