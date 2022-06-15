@@ -6,12 +6,12 @@
   </PropertyGroup>
   <ItemGroup>
 
-    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Dapper" Version="2.0.123"/>
 
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4"/>
 
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Discount.Domain\Discount.Domain.csproj" />
+    <ProjectReference Include="..\Discount.Domain\Discount.Domain.csproj"/>
   </ItemGroup>
 </Project>

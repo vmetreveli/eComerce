@@ -1,3 +1,3 @@
-namespace Catalog.Application;
+namespace Basket.Application;
 
 public sealed record AssemblyReference;

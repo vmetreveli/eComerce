@@ -1,7 +1,7 @@
 using Basket.API.Middleware;
+using Basket.Application;
 using Basket.Data.Repositories;
 using Basket.Domain.Interfaces.Repository;
-using Catalog.Application;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

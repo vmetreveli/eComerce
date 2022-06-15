@@ -1,10 +1,11 @@
 using System;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.Domain.Interfaces.Repository;
-using Catalog.Domain.Models.Entities;
+using Catalog.Application.Dto;
+using Catalog.Application.Features.ProductFeatures.Commands;
+using Catalog.Application.Features.ProductFeatures.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -18,12 +19,12 @@ public class CatalogController : ControllerBase
 
     //TODO
     //Need refactoring
-    private readonly IProductRepository _repository;
+    private readonly IMediator _mediator;
 
-    public CatalogController(ILogger<CatalogController> logger, IProductRepository repository)
+    public CatalogController(ILogger<CatalogController> logger, IMediator mediator)
     {
         _logger = logger ?? throw new ArgumentException(nameof(logger));
-        _repository = repository ?? throw new ArgumentException(nameof(repository));
+        _mediator = mediator ?? throw new ArgumentException(nameof(mediator));
     }
 
     [HttpGet]
@@ -31,9 +32,8 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
     {
-        var products = await _repository.GetProducts(cancellationToken);
-        if (products.Any()) return Ok(products);
-        return NotFound();
+        var products = await _mediator.Send(new GetProductsQuery(), cancellationToken);
+        return Ok(products);
     }
 
     [HttpGet("{id:length(24)}", Name = "GetProduct")]
@@ -41,13 +41,7 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult> GetProductById(string id, CancellationToken cancellationToken)
     {
-        var product = await _repository.GetProduct(id, cancellationToken);
-        if (product == null)
-        {
-            _logger.LogError($"Product with id: {id}, not found.");
-            return NotFound();
-        }
-
+        var product = await _mediator.Send(new GetProductByIdQuery {Id = id}, cancellationToken);
         return Ok(product);
     }
 
@@ -57,27 +51,33 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult> GetProductByCategory(string category, CancellationToken cancellationToken)
     {
-        var products = await _repository.GetProductByCategory(category, cancellationToken);
-        if (products.Any()) return Ok(products);
-        return NotFound();
+        var products = await _mediator.Send(
+            new GetProductByCategoryQuery {Category = category}, cancellationToken);
+        return Ok(products);
     }
 
     [HttpPost]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> CreateProduct([FromBody] Product product, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateProduct([FromBody] ProductDto product, CancellationToken cancellationToken)
     {
-        await _repository.CreateProduct(product, cancellationToken);
+        var products = await _mediator.Send(
+            new CreateProductCommand {ProductDto = product}, cancellationToken);
 
         return CreatedAtRoute("GetProduct", new {id = product.Id}, product);
     }
 
+
     [HttpPut]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdateProduct([FromBody] Product product, CancellationToken cancellationToken) =>
-        Ok(await _repository.UpdateProduct(product, cancellationToken));
+    public async Task<IActionResult>
+        UpdateProduct([FromBody] ProductDto product, CancellationToken cancellationToken) =>
+        Ok(await _mediator.Send(
+            new UpdateProductCommand {ProductDto = product}, cancellationToken));
+
 
     [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteProductById(string id, CancellationToken cancellationToken) =>
-        Ok(await _repository.DeleteProduct(id, cancellationToken));
+        Ok(await _mediator.Send(
+            new DeleteProductCommand {Id = id}, cancellationToken));
 }

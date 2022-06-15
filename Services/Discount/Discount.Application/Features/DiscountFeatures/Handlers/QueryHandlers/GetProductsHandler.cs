@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -13,8 +12,8 @@ namespace Discount.Application.Features.DiscountFeatures.Handlers.QueryHandlers;
 
 public class GetProductsHandler : IQueryHandler<GetProductsQuery, IEnumerable<ProductDto>>
 {
-    private readonly IMapper _mapper;
     private readonly IDiscountRepository _discountRepository;
+    private readonly IMapper _mapper;
 
     public GetProductsHandler(IDiscountRepository discountRepository, IMapper mapper)
     {
@@ -23,8 +22,6 @@ public class GetProductsHandler : IQueryHandler<GetProductsQuery, IEnumerable<Pr
     }
 
 
-    public async Task<IEnumerable<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
-    {
+    public async Task<IEnumerable<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken) =>
         throw new NotImplementedException();
-    }
 }

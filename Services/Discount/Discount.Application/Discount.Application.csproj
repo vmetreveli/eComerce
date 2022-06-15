@@ -5,14 +5,14 @@
     <LangVersion>10</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="FluentValidation" Version="10.4.0" />
-    <PackageReference Include="LinqKit.Core" Version="1.2.2" />
-    <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="AutoMapper" Version="11.0.1"/>
+    <PackageReference Include="FluentValidation" Version="10.4.0"/>
+    <PackageReference Include="LinqKit.Core" Version="1.2.2"/>
+    <PackageReference Include="MediatR" Version="10.0.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Discount.Domain\Discount.Domain.csproj" />
+    <ProjectReference Include="..\Discount.Domain\Discount.Domain.csproj"/>
   </ItemGroup>
 </Project>

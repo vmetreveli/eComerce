@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Basket.Application.Abstractions.Messaging;
 using Basket.Application.Dto;
 

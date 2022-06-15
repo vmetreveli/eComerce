@@ -2,21 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-     <LangVersion>10</LangVersion>
-     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <LangVersion>10</LangVersion>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.5" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.5"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Basket.Application\Basket.Application.csproj" />
-    <ProjectReference Include="..\Basket.Data\Basket.Data.csproj" />
-    <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj" />
+    <ProjectReference Include="..\Basket.Application\Basket.Application.csproj"/>
+    <ProjectReference Include="..\Basket.Data\Basket.Data.csproj"/>
+    <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj"/>
   </ItemGroup>
 
 </Project>

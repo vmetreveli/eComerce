@@ -1,14 +1,14 @@
 ﻿namespace Catalog.Domain.Exceptions;
 
-public sealed class CityNotFoundException : NotFoundException
+public sealed class ProductNotFoundException : NotFoundException
 {
-    public CityNotFoundException(int cityId)
-        : base($"The city with the identifier {cityId} was not found.")
+    public ProductNotFoundException(int productId)
+        : base($"The product with the identifier {productId} was not found.")
     {
     }
 
-    public CityNotFoundException(string cityName)
-        : base($"The city with the Name {cityName} was not found.")
+    public ProductNotFoundException(string productName)
+        : base($"The product with the Name {productName} was not found.")
     {
     }
 }

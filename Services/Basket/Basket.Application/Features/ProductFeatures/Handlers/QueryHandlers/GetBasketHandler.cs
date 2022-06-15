@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,8 +10,8 @@ namespace Basket.Application.Features.ProductFeatures.Handlers.QueryHandlers;
 
 public class GetBasketHandler : IQueryHandler<GetBasketQuery, ShoppingCartDto>
 {
-    private readonly IMapper _mapper;
     private readonly IBasketRepository _basketRepository;
+    private readonly IMapper _mapper;
 
     public GetBasketHandler(IBasketRepository basketRepository, IMapper mapper)
     {
@@ -23,7 +22,7 @@ public class GetBasketHandler : IQueryHandler<GetBasketQuery, ShoppingCartDto>
 
     public async Task<ShoppingCartDto> Handle(GetBasketQuery request, CancellationToken cancellationToken)
     {
-        var basket = await _basketRepository.GetBasket(request.UserName,cancellationToken);
+        var basket = await _basketRepository.GetBasket(request.UserName, cancellationToken);
 
         var res = _mapper.Map<ShoppingCartDto>(basket) ?? new ShoppingCartDto(request.UserName);
 

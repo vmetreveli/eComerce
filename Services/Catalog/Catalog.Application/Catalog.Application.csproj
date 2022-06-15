@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Catalog.Data\Catalog.Data.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\ProductFeatures\Commands\Validator"/>
+  </ItemGroup>
+
 </Project>
