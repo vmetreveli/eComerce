@@ -1,5 +1,4 @@
 using System.Reflection.Metadata;
-using Catalog.API;
 using Discount.API.Middleware;
 using Discount.Application.Behaviors;
 using Discount.Data.Repositories;
@@ -18,7 +17,7 @@ public static class DependencyContainer
     {
         services.AddAutoMapper(typeof(Startup).Assembly);
 
-        services.AddMediatR(typeof(AssemblyReference).Assembly);
+        services.AddMediatR(typeof(Discount.Application.AssemblyReference).Assembly);
 
         services.AddControllers();
 

@@ -1,3 +1,3 @@
-namespace Catalog.Application;
+namespace Discount.Application;
 
 public sealed record AssemblyReference;

@@ -49,6 +49,7 @@ public class ProductRepository : IProductRepository
             .ToListAsync(cancellationToken);
     }
 
+    [Obsolete("Obsolete")]
     public async Task CreateProduct(Product product, CancellationToken cancellationToken) =>
         await _context.Products.InsertOneAsync(product, cancellationToken);
 

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -21,6 +22,7 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand,
     }
 
 
+    [Obsolete("Obsolete")]
     public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = _mapper.Map<Product>(request.ProductDto);

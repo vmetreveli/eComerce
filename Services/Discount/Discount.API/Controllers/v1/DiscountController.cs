@@ -20,6 +20,7 @@ public class DiscountController : ControllerBase
     public DiscountController(IMediator mediator) =>
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
+    [HttpGet]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult> GetDiscount(string productName, CancellationToken cancellationToken) =>
         Ok(await _mediator.Send(

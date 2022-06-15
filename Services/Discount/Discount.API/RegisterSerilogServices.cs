@@ -6,7 +6,7 @@ using NpgsqlTypes;
 using Serilog;
 using Serilog.Sinks.PostgreSQL;
 
-namespace Catalog.API;
+namespace Discount.API;
 
 public static class RegisterSerilogServices
 {
