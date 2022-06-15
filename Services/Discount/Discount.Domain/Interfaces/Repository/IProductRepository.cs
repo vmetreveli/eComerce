@@ -5,14 +5,11 @@ using Discount.Domain.Models.Entities;
 
 namespace Discount.Domain.Interfaces.Repository;
 
-public interface IProductRepository
+public interface  IDiscountRepository
 {
-    Task<IEnumerable<Product>> GetProducts(CancellationToken cancellationToken);
-    Task<Product> GetProduct(string id, CancellationToken cancellationToken);
-    Task<IEnumerable<Product>> GetProductByName(string name, CancellationToken cancellationToken);
-    Task<IEnumerable<Product>> GetProductByCategory(string categoryName, CancellationToken cancellationToken);
+    Task<Coupon> GetDiscount(string productName,CancellationToken cancellationToken);
 
-    Task CreateProduct(Product product, CancellationToken cancellationToken);
-    Task<bool> UpdateProduct(Product product, CancellationToken cancellationToken);
-    Task<bool> DeleteProduct(string id, CancellationToken cancellationToken);
+    Task<bool> CreateDiscount(Coupon coupon,CancellationToken cancellationToken);
+    Task<bool> UpdateDiscount(Coupon coupon,CancellationToken cancellationToken);
+    Task<bool> DeleteDiscount(string productName,CancellationToken cancellationToken);
 }

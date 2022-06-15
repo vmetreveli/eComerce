@@ -2,10 +2,12 @@ using System.Reflection.Metadata;
 using Catalog.API;
 using Discount.API.Middleware;
 using Discount.Application.Behaviors;
+using Discount.Data.Context;
 using Discount.Data.Repositories;
 using Discount.Domain.Interfaces.Repository;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -21,6 +23,10 @@ public static class DependencyContainer
         services.AddMediatR(typeof(AssemblyReference).Assembly);
 
         services.AddControllers();
+
+        // services.AddDbContext<UniDbContext>(options =>
+        //     options.UseNpgsql(
+        //         configuration.GetConnectionString("DefaultConnection")));
 
         services.AddSwaggerGen(c =>
         {
@@ -38,7 +44,7 @@ public static class DependencyContainer
 
         #region Repositories
 
-        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IDiscountRepository, DiscountRepository>();
 
         #endregion
     }

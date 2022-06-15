@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -13,24 +14,17 @@ namespace Discount.Application.Features.DiscountFeatures.Handlers.QueryHandlers;
 public class GetProductsHandler : IQueryHandler<GetProductsQuery, IEnumerable<ProductDto>>
 {
     private readonly IMapper _mapper;
-    private readonly IProductRepository _productRepository;
+    private readonly IDiscountRepository _discountRepository;
 
-    public GetProductsHandler(IProductRepository productRepository, IMapper mapper)
+    public GetProductsHandler(IDiscountRepository discountRepository, IMapper mapper)
     {
-        _productRepository = productRepository;
+        _discountRepository = discountRepository;
         _mapper = mapper;
     }
 
 
     public async Task<IEnumerable<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        var products = await _productRepository.GetProducts(cancellationToken);
-
-        var res = products.Select(i => _mapper.Map<ProductDto>(i));
-
-        // if (!res.Any())
-        //     throw new CityNotFoundException(request.Name);
-
-        return res;
+        throw new NotImplementedException();
     }
 }
