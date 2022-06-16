@@ -10,8 +10,8 @@ namespace Discount.Application.Features.DiscountFeatures.Handlers.CommandHandler
 
 public class UpdateProductCommandHandler : ICommandHandler<UpdateDiscountCommand, bool>
 {
-    private readonly IMapper _mapper;
     private readonly IDiscountRepository _discountRepository;
+    private readonly IMapper _mapper;
 
     public UpdateProductCommandHandler(IMapper mapper, IDiscountRepository discountRepository)
     {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,8 +11,8 @@ namespace Discount.Application.Features.DiscountFeatures.Handlers.QueryHandlers;
 
 public class GetDiscountQueryHandler : IQueryHandler<GetDiscountQuery, CouponDto>
 {
-    private readonly IMapper _mapper;
     private readonly IDiscountRepository _discountRepository;
+    private readonly IMapper _mapper;
 
     public GetDiscountQueryHandler(IDiscountRepository discountRepository, IMapper mapper)
     {
@@ -24,12 +23,9 @@ public class GetDiscountQueryHandler : IQueryHandler<GetDiscountQuery, CouponDto
 
     public async Task<CouponDto> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
     {
-        var discount = await _discountRepository.GetDiscount(request.ProductName,cancellationToken);
+        var discount = await _discountRepository.GetDiscount(request.ProductName, cancellationToken);
 
-        if (discount == null)
-        {
-            throw new DiscountNotFoundException(request.ProductName);
-        }
+        if (discount == null) throw new DiscountNotFoundException(request.ProductName);
 
         return _mapper.Map<CouponDto>(discount);
     }

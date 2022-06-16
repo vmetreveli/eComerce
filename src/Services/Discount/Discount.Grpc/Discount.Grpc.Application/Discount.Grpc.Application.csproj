@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10</LangVersion>
+    <RootNamespace>Discount.Grpc.Application</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -15,5 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Discount.Grpc.Domain\Discount.Grpc.Domain.csproj" />
   </ItemGroup>
+
  
 </Project>

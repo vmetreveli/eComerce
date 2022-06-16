@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Discount.Domain.Exceptions;
+namespace Discount.Grpc.Domain.Exceptions;
 
 public sealed class ValidationException : ApplicationException
 {

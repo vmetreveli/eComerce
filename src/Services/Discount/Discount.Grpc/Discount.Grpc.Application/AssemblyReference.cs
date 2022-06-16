@@ -1,3 +1,3 @@
-namespace Discount.Application;
+namespace Discount.Grpc.Application;
 
 public sealed record AssemblyReference;

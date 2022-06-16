@@ -1,8 +1,6 @@
-using System.Threading;
-using System.Threading.Tasks;
 using Discount.Grpc.Domain.Models.Entities;
 
-namespace Discount.Domain.Interfaces.Repository;
+namespace Discount.Grpc.Domain.Interfaces.Repository;
 
 public interface IDiscountRepository
 {

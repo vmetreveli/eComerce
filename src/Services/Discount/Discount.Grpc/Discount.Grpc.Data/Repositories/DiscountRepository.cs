@@ -1,5 +1,5 @@
 using Dapper;
-using Discount.Domain.Interfaces.Repository;
+using Discount.Grpc.Domain.Interfaces.Repository;
 using Discount.Grpc.Domain.Models.Entities;
 using Microsoft.Extensions.Configuration;
 using Npgsql;

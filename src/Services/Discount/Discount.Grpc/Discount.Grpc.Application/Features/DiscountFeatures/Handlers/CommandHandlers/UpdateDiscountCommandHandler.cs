@@ -1,12 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalog.Application.Abstractions.Messaging;
-using Discount.Application.Features.DiscountFeatures.Commands;
-using Discount.Domain.Interfaces.Repository;
+using Discount.Grpc.Application.Abstractions.Messaging;
+using Discount.Grpc.Application.Features.DiscountFeatures.Commands;
+using Discount.Grpc.Domain.Interfaces.Repository;
 using Discount.Grpc.Domain.Models.Entities;
 
-namespace Discount.Application.Features.DiscountFeatures.Handlers.CommandHandlers;
+namespace Discount.Grpc.Application.Features.DiscountFeatures.Handlers.CommandHandlers;
 
 public class UpdateProductCommandHandler : ICommandHandler<UpdateDiscountCommand, bool>
 {

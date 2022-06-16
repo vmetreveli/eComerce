@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalog.Application.Abstractions.Messaging;
+namespace Discount.Grpc.Application.Abstractions.Messaging;
 
 public interface IIdempotentCommand<out TResponse> : ICommand<TResponse>
 {

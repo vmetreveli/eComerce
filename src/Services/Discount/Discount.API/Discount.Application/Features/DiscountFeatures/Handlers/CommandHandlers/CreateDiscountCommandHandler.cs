@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Application.Abstractions.Messaging;
-using Discount.Application.Dto;
 using Discount.Application.Features.DiscountFeatures.Commands;
 using Discount.Domain.Interfaces.Repository;
 using Discount.Domain.Models.Entities;
@@ -12,8 +11,8 @@ namespace Discount.Application.Features.DiscountFeatures.Handlers.CommandHandler
 
 public class CreateDiscountCommandHandler : ICommandHandler<CreateDiscountCommand, Unit>
 {
-    private readonly IMapper _mapper;
     private readonly IDiscountRepository _discountRepository;
+    private readonly IMapper _mapper;
 
     public CreateDiscountCommandHandler(IMapper mapper, IDiscountRepository discountRepository)
     {

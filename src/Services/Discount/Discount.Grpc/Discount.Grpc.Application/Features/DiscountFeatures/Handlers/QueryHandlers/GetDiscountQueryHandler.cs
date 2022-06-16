@@ -1,14 +1,13 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalog.Application.Abstractions.Messaging;
-using Discount.Application.Dto;
-using Discount.Application.Features.DiscountFeatures.Queries;
-using Discount.Domain.Exceptions;
-using Discount.Domain.Interfaces.Repository;
+using Discount.Grpc.Application.Abstractions.Messaging;
+using Discount.Grpc.Application.Dto;
+using Discount.Grpc.Application.Features.DiscountFeatures.Queries;
+using Discount.Grpc.Domain.Exceptions;
+using Discount.Grpc.Domain.Interfaces.Repository;
 
-namespace Discount.Application.Features.DiscountFeatures.Handlers.QueryHandlers;
+namespace Discount.Grpc.Application.Features.DiscountFeatures.Handlers.QueryHandlers;
 
 public class GetDiscountQueryHandler : IQueryHandler<GetDiscountQuery, CouponDto>
 {

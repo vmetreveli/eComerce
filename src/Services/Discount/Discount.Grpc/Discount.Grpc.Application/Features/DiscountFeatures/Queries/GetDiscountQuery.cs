@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using Catalog.Application.Abstractions.Messaging;
-using Discount.Application.Dto;
+using Discount.Grpc.Application.Abstractions.Messaging;
+using Discount.Grpc.Application.Dto;
 
-namespace Discount.Application.Features.DiscountFeatures.Queries;
+namespace Discount.Grpc.Application.Features.DiscountFeatures.Queries;
 
 public class GetDiscountQuery : IQuery<CouponDto>
 {

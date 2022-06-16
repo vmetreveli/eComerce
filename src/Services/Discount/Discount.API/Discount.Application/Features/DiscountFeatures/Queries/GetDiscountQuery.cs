@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Catalog.Application.Abstractions.Messaging;
 using Discount.Application.Dto;
 

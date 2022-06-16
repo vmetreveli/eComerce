@@ -1,4 +1,4 @@
-﻿namespace Discount.Domain.Exceptions;
+﻿namespace Discount.Grpc.Domain.Exceptions;
 
 public abstract class NotFoundException : ApplicationException
 {

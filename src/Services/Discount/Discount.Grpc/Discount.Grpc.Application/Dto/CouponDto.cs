@@ -1,4 +1,4 @@
-namespace Discount.Application.Dto;
+namespace Discount.Grpc.Application.Dto;
 
 public class CouponDto
 {

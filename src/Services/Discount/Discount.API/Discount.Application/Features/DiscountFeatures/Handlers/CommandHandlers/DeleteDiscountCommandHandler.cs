@@ -9,8 +9,8 @@ namespace Discount.Application.Features.DiscountFeatures.Handlers.CommandHandler
 
 public class DeleteDiscountCommandHandler : ICommandHandler<DeleteDiscountCommand, bool>
 {
-    private readonly IMapper _mapper;
     private readonly IDiscountRepository _discountRepository;
+    private readonly IMapper _mapper;
 
     public DeleteDiscountCommandHandler(IMapper mapper, IDiscountRepository discountRepository)
     {

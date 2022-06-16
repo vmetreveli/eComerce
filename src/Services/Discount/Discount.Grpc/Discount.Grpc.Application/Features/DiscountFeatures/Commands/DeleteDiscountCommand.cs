@@ -1,6 +1,6 @@
-using Catalog.Application.Abstractions.Messaging;
+using Discount.Grpc.Application.Abstractions.Messaging;
 
-namespace Discount.Application.Features.DiscountFeatures.Commands;
+namespace Discount.Grpc.Application.Features.DiscountFeatures.Commands;
 
 public class DeleteDiscountCommand : ICommand<bool>
 {
