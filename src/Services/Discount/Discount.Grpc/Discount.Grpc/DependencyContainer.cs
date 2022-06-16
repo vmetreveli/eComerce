@@ -11,6 +11,7 @@ public static class DependencyContainer
 {
     public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddGrpc();
         services.AddAutoMapper(typeof(Startup).Assembly);
 
         services.AddMediatR(typeof(Discount.Grpc.Application.AssemblyReference).Assembly);

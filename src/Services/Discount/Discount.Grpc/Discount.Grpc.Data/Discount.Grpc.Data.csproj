@@ -4,6 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+      <LangVersion>10</LangVersion>
+      <RootNamespace>Discount.Grpc.Data</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Discount.Grpc.Domain\Discount.Grpc.Domain.csproj" />
+           <ProjectReference Include="..\Discount.Grpc.Domain\Discount.Grpc.Domain.csproj" />
     </ItemGroup>
 
 </Project>
