@@ -11,7 +11,7 @@ COPY ["Services/Basket/Basket.Application/Basket.Application.csproj", "Services/
 COPY ["Services/Basket/Basket.Data/Basket.Data.csproj", "Services/Basket/Basket.Data/"]
 RUN dotnet restore "Services/Basket/Basket.API/Basket.API.csproj"
 COPY . .
-WORKDIR "/src/Basket.API"
+WORKDIR "/src/Services/Basket/Basket.API"
 RUN dotnet build "Basket.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

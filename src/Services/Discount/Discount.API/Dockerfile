@@ -11,7 +11,7 @@ COPY ["Services/Discount/Discount.Application/Discount.Application.csproj", "Ser
 COPY ["Services/Discount/Discount.Data/Discount.Data.csproj", "Services/Discount/Discount.Data/"]
 RUN dotnet restore "Services/Discount/Discount.API/Discount.API.csproj"
 COPY . .
-WORKDIR "/src/Discount.API"
+WORKDIR "/src/Services/Discount/Discount.API"
 RUN dotnet build "Discount.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

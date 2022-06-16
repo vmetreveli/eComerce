@@ -25,12 +25,4 @@
     <ProjectReference Include="..\Catalog.Data\Catalog.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="out\web.config" />
-    <_ContentIncludedByDefault Remove="out\appsettings.Development.json" />
-    <_ContentIncludedByDefault Remove="out\appsettings.json" />
-    <_ContentIncludedByDefault Remove="out\Catalog.API.deps.json" />
-    <_ContentIncludedByDefault Remove="out\Catalog.API.runtimeconfig.json" />
-  </ItemGroup>
-
 </Project>

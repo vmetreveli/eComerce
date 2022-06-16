@@ -32,12 +32,11 @@ public static class DependencyContainer
         });
         /* Validation */
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
+        services.AddValidatorsFromAssembly(typeof(Discount.Application.AssemblyReference).Assembly);
 
         services.AddTransient<ExceptionHandlingMiddleware>();
 
         services.AddSerilogServices(configuration);
-
 
         #region Repositories
 
