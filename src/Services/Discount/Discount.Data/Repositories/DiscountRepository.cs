@@ -20,8 +20,7 @@ public class DiscountRepository : IDiscountRepository
     public async Task<Coupon> GetDiscount(string productName, CancellationToken cancellationToken)
     {
         await using var connection = new NpgsqlConnection(_config.GetConnectionString(_connectionString));
-        throw new Exception(_config.GetConnectionString(_connectionString));
-        var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(new CommandDefinition(
+       var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(new CommandDefinition(
             "SELECT * FROM Coupon WHERE ProductName = @ProductName",
             new {ProductName = productName}, cancellationToken: cancellationToken));
 
