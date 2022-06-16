@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Discount.Grpc": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:1000;https://localhost:1001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
