@@ -19,7 +19,7 @@ public static class DependencyContainer
     {
         services.AddAutoMapper(typeof(Startup).Assembly);
 
-        services.AddMediatR(typeof(AssemblyReference).Assembly);
+        services.AddMediatR(typeof(Catalog.Application.AssemblyReference).Assembly);
 
         services.AddControllers();
 

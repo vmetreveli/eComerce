@@ -4,6 +4,7 @@ using AutoMapper;
 using Catalog.Application.Abstractions.Messaging;
 using Catalog.Application.Features.ProductFeatures.Commands;
 using Catalog.Data.Repositories;
+using Catalog.Domain.Interfaces.Repository;
 using Catalog.Domain.Models.Entities;
 
 namespace Catalog.Application.Features.ProductFeatures.Handlers.CommandHandlers;
@@ -11,9 +12,9 @@ namespace Catalog.Application.Features.ProductFeatures.Handlers.CommandHandlers;
 public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand, bool>
 {
     private readonly IMapper _mapper;
-    private readonly ProductRepository _productRepository;
+    private readonly IProductRepository _productRepository;
 
-    public UpdateProductCommandHandler(IMapper mapper, ProductRepository productRepository)
+    public UpdateProductCommandHandler(IMapper mapper, IProductRepository productRepository)
     {
         _mapper = mapper;
         _productRepository = productRepository;
