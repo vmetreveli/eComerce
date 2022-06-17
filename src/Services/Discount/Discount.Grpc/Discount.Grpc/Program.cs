@@ -3,34 +3,37 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Discount.Grpc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
-namespace Discount.Grpc
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+namespace Discount.Grpc;
 
-        // Additional configuration is required to successfully run gRPC on macOS.
-        // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+public class Program
+{
+    public static void Main(string[] args) =>
+        CreateHostBuilder(args)
+            .Build()
+            .MigrateDatabase<Program>()
+            .Run();
+
+    // Additional configuration is required to successfully run gRPC on macOS.
+    // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+            #if DEBUG
+                webBuilder.ConfigureKestrel(options =>
                 {
-                    webBuilder.ConfigureKestrel(options =>
-                    {
-                        //For MacOs
-                        //HTTP/2 over TLS is not supported on macOS due to missing ALPN support.
-                        // Setup a HTTP/2 endpoint without TLS.
-                        options.ListenLocalhost(5000, o => o.Protocols =
-                            HttpProtocols.Http2);
-                    });
-                    webBuilder.UseStartup<Startup>();
+                    //For MacOs
+                    //HTTP/2 over TLS is not supported on macOS due to missing ALPN support.
+                    // Setup a HTTP/2 endpoint without TLS.
+                    options.ListenLocalhost(3001, o => o.Protocols =
+                        HttpProtocols.Http2);
                 });
-    }
+            #endif
+                webBuilder.UseStartup<Startup>();
+            });
 }
