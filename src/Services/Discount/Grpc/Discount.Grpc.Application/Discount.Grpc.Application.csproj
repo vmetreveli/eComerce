@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10</LangVersion>
+    <RootNamespace>Discount.Grpc.Application</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1"/>
     <PackageReference Include="FluentValidation" Version="11.0.3"/>
@@ -13,17 +13,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1"/>
   </ItemGroup>
-
   <ItemGroup>
-    <Content Include="Features\.DS_Store"/>
+    <ProjectReference Include="..\Discount.Grpc.Domain\Discount.Grpc.Domain.csproj"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Catalog.Data\Catalog.Data.csproj"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\ProductFeatures\Commands\Validator"/>
-  </ItemGroup>
 
 </Project>

@@ -32,7 +32,14 @@ services:
     image: ${DOCKER_REGISTRY-}discountapi
     build:
       context: .
-      dockerfile: Services/Discount/Discount.API/Discount.API/Dockerfile
+      dockerfile: Services/Discount/API/Discount.API/Dockerfile
+
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Grpc/Discount.Grpc/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
@@ -44,3 +51,4 @@ volumes:
 
 
 #docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+#docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build

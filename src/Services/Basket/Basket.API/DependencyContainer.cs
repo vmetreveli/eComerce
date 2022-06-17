@@ -44,6 +44,5 @@ public static class DependencyContainer
         services.AddScoped<DiscountGrpcService>();
 
         services.AddScoped<IBasketRepository, BasketRepository>();
-
     }
 }

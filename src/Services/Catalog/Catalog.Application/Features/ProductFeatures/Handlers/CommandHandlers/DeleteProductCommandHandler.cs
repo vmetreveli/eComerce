@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Application.Abstractions.Messaging;
 using Catalog.Application.Features.ProductFeatures.Commands;
-using Catalog.Data.Repositories;
 using Catalog.Domain.Interfaces.Repository;
 
 namespace Catalog.Application.Features.ProductFeatures.Handlers.CommandHandlers;

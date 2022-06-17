@@ -15,8 +15,8 @@ namespace Basket.API.Controllers.v1;
 [Route("api/v1/[controller]")]
 public class BasketController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly DiscountGrpcService _discountGrpcService;
+    private readonly IMediator _mediator;
 
     public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService)
     {
@@ -38,7 +38,6 @@ public class BasketController : ControllerBase
     public async Task<IActionResult> UpdateBasket([FromBody] ShoppingCartDto shoppingCartDto,
         CancellationToken cancellationToken)
     {
-
         foreach (var item in shoppingCartDto.Items)
         {
             var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
