@@ -1,6 +1,7 @@
 using System.Reflection.Metadata;
 using Discount.Grpc.Data.Repositories;
 using Discount.Grpc.Domain.Interfaces.Repository;
+using Discount.Grpc.Middleware;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,7 @@ public static class DependencyContainer
         // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         // services.AddValidatorsFromAssembly(typeof(Discount.Application.AssemblyReference).Assembly);
         //
-        // services.AddTransient<ExceptionHandlingMiddleware>();
+        services.AddTransient<ExceptionHandlingMiddleware>();
         //
         // services.AddSerilogServices(configuration);
 

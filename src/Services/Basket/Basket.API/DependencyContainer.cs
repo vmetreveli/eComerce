@@ -1,7 +1,10 @@
+using System;
+using Basket.API.GrpcServices;
 using Basket.API.Middleware;
 using Basket.Application;
 using Basket.Data.Repositories;
 using Basket.Domain.Interfaces.Repository;
+using Discount.Grpc.Protos;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,10 +37,13 @@ public static class DependencyContainer
 
         //services.AddSerilogServices(configuration);
 
-        #region Repositories
+        services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o =>
+        {
+            o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]);
+        });
+        services.AddScoped<DiscountGrpcService>();
 
         services.AddScoped<IBasketRepository, BasketRepository>();
 
-        #endregion
     }
 }

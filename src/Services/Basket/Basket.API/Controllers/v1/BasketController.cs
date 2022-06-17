@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Basket.API.GrpcServices;
 using Basket.Application.Dto;
 using Basket.Application.Features.ProductFeatures.Commands;
 using Basket.Application.Features.ProductFeatures.Queries;
@@ -15,9 +16,13 @@ namespace Basket.API.Controllers.v1;
 public class BasketController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly DiscountGrpcService _discountGrpcService;
 
-    public BasketController(IMediator mediator) =>
+    public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService)
+    {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _discountGrpcService = discountGrpcService;
+    }
 
     [HttpGet("{userName}", Name = "GetBasket")]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
@@ -33,6 +38,13 @@ public class BasketController : ControllerBase
     public async Task<IActionResult> UpdateBasket([FromBody] ShoppingCartDto shoppingCartDto,
         CancellationToken cancellationToken)
     {
+
+        foreach (var item in shoppingCartDto.Items)
+        {
+            var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
+            item.Price = coupon.Amount;
+        }
+
         var products = await _mediator.Send(new UpdateBasketCommand {ShoppingCartDto = shoppingCartDto},
             cancellationToken);
 

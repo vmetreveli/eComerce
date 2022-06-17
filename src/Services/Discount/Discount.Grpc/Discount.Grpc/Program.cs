@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Discount.Grpc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Discount.Grpc;
@@ -25,8 +27,15 @@ public class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
             #if DEBUG
+
+
                 webBuilder.ConfigureKestrel(options =>
                 {
+                   //  int port;
+                   // var scope= options.ApplicationServices.CreateScope();
+                   // var services=scope.ServiceProvider;
+                   // var configuration = services.GetRequiredService<IConfiguration>();
+                   // port = int.Parse(configuration.GetSection("DatabaseSettings:ConnectionString").Value);
                     //For MacOs
                     //HTTP/2 over TLS is not supported on macOS due to missing ALPN support.
                     // Setup a HTTP/2 endpoint without TLS.

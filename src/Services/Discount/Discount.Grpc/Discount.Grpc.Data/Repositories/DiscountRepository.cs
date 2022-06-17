@@ -21,9 +21,9 @@ public class DiscountRepository : IDiscountRepository
             "SELECT * FROM Coupon WHERE ProductName = @ProductName",
             new {ProductName = productName}, cancellationToken: cancellationToken));
 
-        if (coupon == null)
-            return new Coupon
-                {ProductName = "No Discount", Amount = 0, Description = "No Discount Desc"};
+        // if (coupon == null)
+        //     return new Coupon
+        //         {ProductName = "No Discount", Amount = 0, Description = "No Discount Desc"};
 
         return coupon;
     }
