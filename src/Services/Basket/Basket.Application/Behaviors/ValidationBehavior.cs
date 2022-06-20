@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-using ValidationException = Catalog.Application.Exceptions.ValidationException;
+using ValidationException = Basket.Domain.Exceptions.ValidationException;
 
 namespace Basket.Application.Behaviors;
 

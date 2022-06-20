@@ -1,4 +1,4 @@
-﻿namespace Catalog.Domain.Exceptions;
+﻿namespace Basket.Domain.Exceptions;
 
 public abstract class NotFoundException : ApplicationException
 {

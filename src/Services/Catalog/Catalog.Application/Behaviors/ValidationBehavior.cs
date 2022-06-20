@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-using ValidationException = Catalog.Application.Exceptions.ValidationException;
+using ValidationException = Catalog.Domain.Exceptions.ValidationException;
 
 namespace Catalog.Application.Behaviors;
 

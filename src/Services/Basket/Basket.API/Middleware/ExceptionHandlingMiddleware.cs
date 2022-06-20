@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Catalog.Application.Exceptions;
-using Catalog.Domain.Exceptions;
+using Basket.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using ApplicationException = Catalog.Domain.Exceptions.ApplicationException;
+using ApplicationException = Basket.Domain.Exceptions.ApplicationException;
 
 namespace Basket.API.Middleware;
 

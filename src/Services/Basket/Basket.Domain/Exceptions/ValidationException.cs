@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Catalog.Domain.Exceptions;
 
-namespace Catalog.Application.Exceptions;
+namespace Basket.Domain.Exceptions;
 
 public sealed class ValidationException : ApplicationException
 {
