@@ -1,9 +1,10 @@
+using System;
+using System.Threading;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace Ordering.API.Extensions;
 
@@ -38,8 +39,8 @@ public static class HostExtensions
             if (retryForAvailability < 50)
             {
                 retryForAvailability++;
-                System.Threading.Thread.Sleep(2000);
-                MigrateDatabase<TContext>(host, seeder, retryForAvailability);
+                Thread.Sleep(2000);
+                MigrateDatabase(host, seeder, retryForAvailability);
             }
         }
 

@@ -25,7 +25,7 @@ public class Startup
     {
         if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-       app.UseRouting();
+        app.UseRouting();
 
         app.UseEndpoints(endpoints =>
         {

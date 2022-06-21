@@ -27,7 +27,7 @@ public class GetDiscountQueryHandler : IQueryHandler<GetDiscountQuery, CouponDto
 
         if (discount == null)
             throw new RpcException(new Status(StatusCode.NotFound, $"Discount With ProductName={request.ProductName} " +
-            "is not found."));
+                                                                   "is not found."));
 
         return _mapper.Map<CouponDto>(discount);
     }

@@ -19,6 +19,5 @@ public static class DependencyContainer
         services.AddControllers();
 
         services.AddScoped<IDiscountRepository, DiscountRepository>();
-
     }
 }

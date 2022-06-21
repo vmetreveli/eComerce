@@ -8,22 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.46.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
-    <PackageReference Include="Npgsql" Version="6.0.4" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.46.0"/>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6"/>
+    <PackageReference Include="Npgsql" Version="6.0.5"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Discount.Grpc.Domain\Discount.Grpc.Domain.csproj" />
-    <ProjectReference Include="..\Discount.Grpc.Data\Discount.Grpc.Data.csproj" />
-    <ProjectReference Include="..\Discount.Grpc.Application\Discount.Grpc.Application.csproj" />
+    <ProjectReference Include="..\Discount.Grpc.Domain\Discount.Grpc.Domain.csproj"/>
+    <ProjectReference Include="..\Discount.Grpc.Data\Discount.Grpc.Data.csproj"/>
+    <ProjectReference Include="..\Discount.Grpc.Application\Discount.Grpc.Application.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-      <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\discount.proto" GrpcServices="Server"/>
   </ItemGroup>
 
 </Project>

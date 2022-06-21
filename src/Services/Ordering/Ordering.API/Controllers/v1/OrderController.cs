@@ -59,7 +59,7 @@ public class OrderController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> DeleteOrder(int id, CancellationToken cancellationToken)
     {
-        var command = new DeleteOrderCommand() {Id = id};
+        var command = new DeleteOrderCommand {Id = id};
         await _mediator.Send(command, cancellationToken);
         return NoContent();
     }

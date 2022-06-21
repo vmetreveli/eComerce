@@ -7,13 +7,14 @@ using Ordering.Domain.Entities;
 
 namespace Ordering.Application.Features.Orders.Commands.DeleteOrder;
 
-public class DeleteOrderCommandHandler: IRequestHandler<DeleteOrderCommand>
+public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
 {
-    private readonly IOrderRepository _orderRepository;
-    private readonly IMapper _mapper;
     private readonly ILogger<DeleteOrderCommandHandler> _logger;
+    private readonly IMapper _mapper;
+    private readonly IOrderRepository _orderRepository;
 
-    public DeleteOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<DeleteOrderCommandHandler> logger)
+    public DeleteOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper,
+        ILogger<DeleteOrderCommandHandler> logger)
     {
         _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -22,13 +23,10 @@ public class DeleteOrderCommandHandler: IRequestHandler<DeleteOrderCommand>
 
     public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
-        var orderToDelete = await _orderRepository.GetByIdAsync(request.Id,cancellationToken);
-        if (orderToDelete == null)
-        {
-            throw new NotFoundException(nameof(Order), request.Id);
-        }
+        var orderToDelete = await _orderRepository.GetByIdAsync(request.Id, cancellationToken);
+        if (orderToDelete == null) throw new NotFoundException(nameof(Order), request.Id);
 
-        await _orderRepository.DeleteAsync(orderToDelete,cancellationToken);
+        await _orderRepository.DeleteAsync(orderToDelete, cancellationToken);
         _logger.LogInformation($"Order {orderToDelete.Id} is successfully deleted.");
 
         return Unit.Value;

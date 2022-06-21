@@ -1,14 +1,13 @@
 using AutoMapper;
 using MediatR;
 using Ordering.Application.Contracts.Persistence;
-using Ordering.Application.Models;
 
 namespace Ordering.Application.Features.Orders.Queries.GetOrdersList;
 
-public class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery,List<OrderVm>>
+public class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery, List<OrderVm>>
 {
-    private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;
+    private readonly IOrderRepository _orderRepository;
 
     public GetOrdersListQueryHandler(IOrderRepository orderRepository, IMapper mapper)
     {
@@ -18,8 +17,7 @@ public class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery,List
 
     public async Task<List<OrderVm>> Handle(GetOrdersListQuery request, CancellationToken cancellationToken)
     {
-       var orderList= await _orderRepository.GetOrdersByUserName(request.UserName,cancellationToken);
-      return _mapper.Map<List<OrderVm>>(orderList);
-
+        var orderList = await _orderRepository.GetOrdersByUserName(request.UserName, cancellationToken);
+        return _mapper.Map<List<OrderVm>>(orderList);
     }
 }

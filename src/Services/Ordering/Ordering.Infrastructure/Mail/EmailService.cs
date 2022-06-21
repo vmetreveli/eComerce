@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Ordering.Application.Contracts.Infrastructure;
@@ -7,9 +8,9 @@ using SendGrid.Helpers.Mail;
 
 namespace Ordering.Infrastructure.Mail;
 
-public class EmailService: IEmailService
+public class EmailService : IEmailService
 {
-    private readonly  EmailSettings _emailSettings;
+    private readonly EmailSettings _emailSettings;
     private readonly ILogger<EmailService> _logger;
 
     public EmailService(IOptions<EmailSettings> emailSettings, ILogger<EmailService> logger)
@@ -37,7 +38,7 @@ public class EmailService: IEmailService
 
         _logger.LogInformation("Email sent.");
 
-        if (response.StatusCode == System.Net.HttpStatusCode.Accepted || response.StatusCode == System.Net.HttpStatusCode.OK)
+        if (response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.OK)
             return true;
 
         _logger.LogError("Email sending failed.");

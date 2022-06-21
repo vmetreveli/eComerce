@@ -6,7 +6,7 @@ namespace Ordering.Infrastructure.Persistence;
 
 public class OrderContext : DbContext
 {
-    public OrderContext(DbContextOptions<OrderContext> options, DbSet<Order> orders) : base(options)
+    public OrderContext(DbContextOptions<OrderContext> options) : base(options)
     {
     }
 

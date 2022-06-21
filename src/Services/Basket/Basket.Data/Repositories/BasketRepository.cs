@@ -24,7 +24,7 @@ public class BasketRepository : IBasketRepository
 
     public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket, CancellationToken cancellationToken)
     {
-        await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket), token: cancellationToken);
+        await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket), cancellationToken);
         return await GetBasket(basket.UserName, cancellationToken);
     }
 

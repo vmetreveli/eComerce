@@ -10,10 +10,10 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder;
 
 public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand, int>
 {
-    private readonly IOrderRepository _orderRepository;
-    private readonly IMapper _mapper;
     private readonly IEmailService _emailService;
     private readonly ILogger<CheckoutOrderCommandHandler> _logger;
+    private readonly IMapper _mapper;
+    private readonly IOrderRepository _orderRepository;
 
     public CheckoutOrderCommandHandler(IMapper mapper, IOrderRepository orderRepository, IEmailService emailService,
         ILogger<CheckoutOrderCommandHandler> logger)
