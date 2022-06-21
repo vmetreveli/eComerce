@@ -1,12 +1,15 @@
 using System.Reflection;
 using AutoMapper;
 using CleanArchitecture.Application.Common.Mappings;
+using Ordering.Application.Features.Orders.Queries.GetOrdersList;
+using Ordering.Domain.Entities;
 
 namespace Ordering.Application.Mappings;
 
 public class MappingProfile : Profile
 {
-    public MappingProfile() => ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+    public MappingProfile() =>
+        CreateMap<Order, OrderVm>().ReverseMap();
 
     private void ApplyMappingsFromAssembly(Assembly assembly)
     {
