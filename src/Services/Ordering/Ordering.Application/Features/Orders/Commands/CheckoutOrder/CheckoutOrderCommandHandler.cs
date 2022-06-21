@@ -37,7 +37,7 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
     {
         try
         {
-            await _emailService.SendMail(new Email
+            await _emailService.SendEmail(new Email
             {
                 To = order.EmailAddress,
                 Subject = "Order was created",
