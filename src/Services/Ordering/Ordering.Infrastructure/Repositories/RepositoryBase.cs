@@ -53,7 +53,7 @@ public class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
     }
 
     public virtual async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken) =>
-        await DbContext.Set<T>().FindAsync(new object[] {id, cancellationToken}, cancellationToken);
+        await DbContext.Set<T>().FindAsync(new object?[]{id},cancellationToken);
 
     public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
     {
