@@ -2,10 +2,13 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Basket.API.GrpcServices;
 using Basket.Application.Dto;
 using Basket.Application.Features.ProductFeatures.Commands;
 using Basket.Application.Features.ProductFeatures.Queries;
+using EventBus.Messages.Events;
+using MassTransit.Transports;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +20,16 @@ public class BasketController : ControllerBase
 {
     private readonly DiscountGrpcService _discountGrpcService;
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
+    private readonly PublishEndpoint _publishEndpoint;
 
-    public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService)
+    public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService, IMapper mapper,
+        PublishEndpoint publishEndpoint)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _discountGrpcService = discountGrpcService;
+        _mapper = mapper;
+        _publishEndpoint = publishEndpoint;
     }
 
     [HttpGet("{userName}", Name = "GetBasket")]
@@ -58,5 +66,36 @@ public class BasketController : ControllerBase
             cancellationToken);
 
         return Ok();
+    }
+
+    [Route("[action]")]
+    [HttpPost]
+    [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
+    public async Task<IActionResult> Checkout([FromBody] BasketCheckoutDto basketCheckout,
+        CancellationToken cancellationToken)
+    {
+        // get existing basket with total price
+        // Create basketCheckoutEvent -- Set TotalPrice on basketCheckout eventMessage
+        // send checkout event to rabbitmq
+        // remove the basket
+
+        // get existing basket with total price
+        var basket = await _mediator.Send(new GetBasketQuery {UserName = basketCheckout.UserName}, cancellationToken);
+        if (basket == null)
+        {
+            return BadRequest();
+        }
+
+        // send checkout event to rabbitmq
+        var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+        eventMessage.TotalPrice = basket.TotalPrice;
+        await _publishEndpoint.Publish(eventMessage, cancellationToken);
+
+        // remove the basket
+        await _mediator.Send(new DeleteBasketCommand {UserName = basket.UserName},
+            cancellationToken);
+
+
+        return Accepted();
     }
 }

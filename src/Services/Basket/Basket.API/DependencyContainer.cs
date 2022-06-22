@@ -5,6 +5,7 @@ using Basket.Application;
 using Basket.Data.Repositories;
 using Basket.Domain.Interfaces.Repository;
 using Discount.Grpc.Protos;
+using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,18 @@ public static class DependencyContainer
             o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]);
         });
         services.AddScoped<DiscountGrpcService>();
+
+        // MassTransit-RabbitMQ Configuration
+        services.AddMassTransit(config =>
+        {
+           config.UsingRabbitMq((ctx,cfg)=>
+           {
+               cfg.Host(configuration["EventBusSettings:HostAddress"]);
+           });
+
+        });
+        //services.AddMassTransitHostedService();
+
 
         services.AddScoped<IBasketRepository, BasketRepository>();
     }
