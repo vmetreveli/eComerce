@@ -1,6 +1,7 @@
 using System.Reflection;
 using AutoMapper;
 using CleanArchitecture.Application.Common.Mappings;
+using Ordering.Application.Features.Orders.Commands.CheckoutOrder;
 using Ordering.Application.Features.Orders.Queries.GetOrdersList;
 using Ordering.Domain.Entities;
 
@@ -8,41 +9,10 @@ namespace Ordering.Application.Mappings;
 
 public class MappingProfile : Profile
 {
-    public MappingProfile() =>
-        CreateMap<Order, OrderVm>().ReverseMap();
-
-    private void ApplyMappingsFromAssembly(Assembly assembly)
+    public MappingProfile()
     {
-        var mapFromType = typeof(IMapFrom<>);
-
-        var mappingMethodName = nameof(IMapFrom<object>.Mapping);
-
-        bool HasInterface(Type t)
-        {
-            return t.IsGenericType && t.GetGenericTypeDefinition() == mapFromType;
-        }
-
-        var types = assembly.GetExportedTypes().Where(t => t.GetInterfaces().Any(HasInterface)).ToList();
-
-        var argumentTypes = new[] {typeof(Profile)};
-
-        foreach (var type in types)
-        {
-            var instance = Activator.CreateInstance(type);
-
-            var methodInfo = type.GetMethod(mappingMethodName);
-
-            if (methodInfo != null)
-                methodInfo.Invoke(instance, new object[] {this});
-            else
-            {
-                var interfaces = type.GetInterfaces().Where(HasInterface).ToList();
-
-                if (interfaces.Count > 0)
-                    foreach (var interfaceMethodInfo in interfaces.Select(@interface =>
-                                 @interface.GetMethod(mappingMethodName, argumentTypes)))
-                        interfaceMethodInfo?.Invoke(instance, new object[] {this});
-            }
-        }
+        CreateMap<Order, OrderVm>().ReverseMap();
+        CreateMap<Order, CheckoutOrderCommand>().ReverseMap();
     }
+
 }
