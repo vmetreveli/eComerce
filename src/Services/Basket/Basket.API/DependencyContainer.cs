@@ -7,6 +7,7 @@ using Discount.Grpc.Protos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using MassTransit;
 
 namespace Basket.API;
 
@@ -23,6 +24,15 @@ public static class DependencyContainer
         {
             c.SwaggerDoc("v1", new OpenApiInfo
                 {Title = "Basket.API", Version = "v1"});
+        });
+        // MassTransit-RabbitMQ Configuration
+        services.AddMassTransit(config =>
+        {
+            config.UsingRabbitMq((ctx,cfg)=>
+            {
+                cfg.Host(configuration["EventBusSettings:HostAddress"]);
+            });
+
         });
 
         services.AddTransient<ExceptionHandlingMiddleware>();

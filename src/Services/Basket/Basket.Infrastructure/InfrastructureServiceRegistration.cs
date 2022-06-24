@@ -12,16 +12,6 @@ public static class InfrastructureServiceRegistration
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        // MassTransit-RabbitMQ Configuration
-        services.AddMassTransit(config =>
-        {
-            config.UsingRabbitMq((ctx,cfg)=>
-            {
-                cfg.Host(configuration["EventBusSettings:HostAddress"]);
-            });
-
-        });
-
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddStackExchangeRedisCache(options =>
         {

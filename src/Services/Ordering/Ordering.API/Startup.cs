@@ -1,9 +1,13 @@
+using EventBus.Messages.Common;
+using EventBus.Messages.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Ordering.API.EventBusConsumer;
 using Ordering.Application;
 using Ordering.Infrastructure;
 
@@ -22,24 +26,24 @@ public class Startup
         services.AddApplicationServices();
         services.AddInfrastructureServices(Configuration);
 
-        // MassTransit-RabbitMQ Configuration
-        // services.AddMassTransit(config => {
-        //
-        //     config.AddConsumer<BasketCheckoutConsumer>();
-        //
-        //     config.UsingRabbitMq((ctx, cfg) => {
-        //         cfg.Host(Configuration["EventBusSettings:HostAddress"]);
-        //
-        //         cfg.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueue, c =>
-        //         {
-        //             c.ConfigureConsumer<BasketCheckoutConsumer>(ctx);
-        //         });
-        //     });
-        // });
-        //services.AddMassTransitHostedService();
+       // MassTransit-RabbitMQ Configuration
+        services.AddMassTransit(config =>
+        {
+            config.AddConsumer<BasketCheckoutConsumer>();
+            config.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+
+                cfg.ReceiveEndpoint(EventBusConstants.BASKET_CHECKOUT_QUEUE, c =>
+                {
+                    c.ConfigureConsumer<BasketCheckoutConsumer>(ctx);
+                });
+            });
+        });
         services.AddControllers();
 
         // General Configuration
+        services.AddScoped<BasketCheckoutConsumer>();
         services.AddAutoMapper(typeof(Startup));
         services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Ordering.API", Version = "v1"}); });
     }
