@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Basket.Domain.Exceptions;
+using Basket.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using ApplicationException = Basket.Domain.Exceptions.ApplicationException;
 
 namespace Basket.API.Middleware;
 
@@ -44,7 +43,7 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
 
         var response = new
         {
-            title = GetTitle(exception),
+            title = "Server Error",
             status = statusCode,
             detail = exception.Message,
             errors = GetErrors(exception)
@@ -66,18 +65,13 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
             _ => StatusCodes.Status500InternalServerError
         };
 
-    private static string GetTitle(Exception exception) =>
-        exception switch
-        {
-            ApplicationException applicationException => applicationException.Title,
-            _ => "Server Error"
-        };
 
-    private static IReadOnlyDictionary<string, string[]> GetErrors(Exception exception)
+
+    private static IDictionary<string, string[]> GetErrors(Exception exception)
     {
-        IReadOnlyDictionary<string, string[]> errors = null;
+        IDictionary<string, string[]> errors = null;
 
-        if (exception is ValidationException validationException) errors = validationException.ErrorsDictionary;
+        if (exception is ValidationException validationException) errors = validationException.Errors;
 
         return errors;
     }

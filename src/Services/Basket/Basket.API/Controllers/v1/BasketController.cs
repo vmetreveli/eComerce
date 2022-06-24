@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Basket.API.GrpcServices;
 using Basket.Application.Dto;
-using Basket.Application.Features.ProductFeatures.Commands;
-using Basket.Application.Features.ProductFeatures.Queries;
+using Basket.Application.Features.Products.Commands.DeleteBasket;
+using Basket.Application.Features.Products.Commands.UpdateBasket;
+using Basket.Application.Features.Products.Queries.GetBasket;
 using EventBus.Messages.Events;
+using MassTransit;
 using MassTransit.Transports;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +23,10 @@ public class BasketController : ControllerBase
     private readonly DiscountGrpcService _discountGrpcService;
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    private readonly PublishEndpoint _publishEndpoint;
+    private readonly IPublishEndpoint _publishEndpoint;
 
     public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService, IMapper mapper,
-        PublishEndpoint publishEndpoint)
+        IPublishEndpoint publishEndpoint)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _discountGrpcService = discountGrpcService;
@@ -70,7 +72,8 @@ public class BasketController : ControllerBase
 
     [Route("[action]")]
     [HttpPost]
-    [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
+    [ProducesResponseType((int) HttpStatusCode.Accepted)]
+    [ProducesResponseType((int) HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Checkout([FromBody] BasketCheckoutDto basketCheckout,
         CancellationToken cancellationToken)
     {
