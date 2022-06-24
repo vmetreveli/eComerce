@@ -82,7 +82,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:RedisConnection=basketdb:6379"
       - "GrpcSettings:DiscountUrl=http://discount.grpc"
-      - "EventBusSettings:HostAddress:amqp://guest:guest@rabbitmq:5672"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - basketdb
       - rabbitmq
