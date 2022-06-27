@@ -10,4 +10,16 @@
     <PackageReference Include="Ocelot" Version="18.0.0" />
     <PackageReference Include="Ocelot.Cache.CacheManager" Version="18.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="ocelot.Development.json">
+      <DependentUpon>ocelot.json</DependentUpon>
+    </Content>
+    <Content Update="ocelot.Local.json">
+      <DependentUpon>ocelot.json</DependentUpon>
+    </Content>
+    <Content Update="appsettings.Development.json">
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+  </ItemGroup>
 </Project>
