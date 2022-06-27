@@ -1,6 +1,5 @@
 using System.Reflection;
 using Basket.Application.Behaviours;
-using Basket.Application.Contracts.Persistence;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

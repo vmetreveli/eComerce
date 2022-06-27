@@ -14,8 +14,5 @@ public class AutoMapperProfile : Profile
         CreateMap<ShoppingCartItemDto, ShoppingCartItem>().ReverseMap();
 
         CreateMap<BasketCheckoutDto, BasketCheckoutEvent>().ReverseMap();
-
-
-
     }
 }

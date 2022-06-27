@@ -10,9 +10,9 @@ namespace Ordering.API.EventBusConsumer;
 
 public class BasketCheckoutConsumer : IConsumer<BasketCheckoutEvent>
 {
+    private readonly ILogger<BasketCheckoutConsumer> _logger;
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
-    private readonly ILogger<BasketCheckoutConsumer> _logger;
 
     public BasketCheckoutConsumer(IMapper mapper, IMediator mediator, ILogger<BasketCheckoutConsumer> logger)
     {
@@ -24,7 +24,7 @@ public class BasketCheckoutConsumer : IConsumer<BasketCheckoutEvent>
     public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
     {
         var command = _mapper.Map<CheckoutOrderCommand>(context.Message);
-        var result=await _mediator.Send(command);
+        var result = await _mediator.Send(command);
 
         _logger.LogInformation("BasketCheckoutEvent consumed successfully. Created Order Id : {NewOrderId}", result);
     }

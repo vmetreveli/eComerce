@@ -2,10 +2,6 @@ namespace EventBus.Messages.Events;
 
 public class IntegrationBaseEvent
 {
-    public Guid Id { get; private set; }
-
-    public DateTime CreationDate { get; private set; }
-
     public IntegrationBaseEvent()
     {
         Id = Guid.NewGuid();
@@ -18,5 +14,7 @@ public class IntegrationBaseEvent
         CreationDate = createDate;
     }
 
+    public Guid Id { get; }
 
+    public DateTime CreationDate { get; }
 }

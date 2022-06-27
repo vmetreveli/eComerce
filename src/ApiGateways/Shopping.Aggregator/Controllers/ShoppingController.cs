@@ -11,8 +11,8 @@ namespace Shopping.Aggregator.Controllers;
 [Route("api/v1/[controller]")]
 public class ShoppingController : ControllerBase
 {
-    private readonly ICatalogService _catalogService;
     private readonly IBasketService _basketService;
+    private readonly ICatalogService _catalogService;
     private readonly IOrderService _orderService;
 
     public ShoppingController(ICatalogService catalogService, IBasketService basketService, IOrderService orderService)

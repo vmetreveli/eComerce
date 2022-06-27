@@ -3,7 +3,6 @@ using Basket.Application.Contracts.Persistence;
 using Basket.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MassTransit;
 
 namespace Basket.Infrastructure;
 

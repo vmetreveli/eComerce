@@ -1,5 +1,4 @@
 using EventBus.Messages.Common;
-using EventBus.Messages.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +25,7 @@ public class Startup
         services.AddApplicationServices();
         services.AddInfrastructureServices(Configuration);
 
-       // MassTransit-RabbitMQ Configuration
+        // MassTransit-RabbitMQ Configuration
         services.AddMassTransit(config =>
         {
             config.AddConsumer<BasketCheckoutConsumer>();
@@ -34,10 +33,8 @@ public class Startup
             {
                 cfg.Host(Configuration["EventBusSettings:HostAddress"]);
 
-                cfg.ReceiveEndpoint(EventBusConstants.BASKET_CHECKOUT_QUEUE, c =>
-                {
-                    c.ConfigureConsumer<BasketCheckoutConsumer>(ctx);
-                });
+                cfg.ReceiveEndpoint(EventBusConstants.BASKET_CHECKOUT_QUEUE,
+                    c => { c.ConfigureConsumer<BasketCheckoutConsumer>(ctx); });
             });
         });
         services.AddControllers();

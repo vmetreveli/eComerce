@@ -15,5 +15,4 @@ public class MappingProfile : Profile
 
         CreateMap<BasketCheckoutDto, BasketCheckoutEvent>().ReverseMap();
     }
-
 }

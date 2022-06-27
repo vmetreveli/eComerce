@@ -66,7 +66,6 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
         };
 
 
-
     private static IDictionary<string, string[]> GetErrors(Exception exception)
     {
         IDictionary<string, string[]> errors = null;

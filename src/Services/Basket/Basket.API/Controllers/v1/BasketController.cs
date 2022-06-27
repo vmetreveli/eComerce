@@ -10,7 +10,6 @@ using Basket.Application.Features.Products.Commands.UpdateBasket;
 using Basket.Application.Features.Products.Queries.GetBasket;
 using EventBus.Messages.Events;
 using MassTransit;
-using MassTransit.Transports;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +20,8 @@ namespace Basket.API.Controllers.v1;
 public class BasketController : ControllerBase
 {
     private readonly DiscountGrpcService _discountGrpcService;
-    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
     private readonly IPublishEndpoint _publishEndpoint;
 
     public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService, IMapper mapper,
@@ -84,10 +83,7 @@ public class BasketController : ControllerBase
 
         // get existing basket with total price
         var basket = await _mediator.Send(new GetBasketQuery {UserName = basketCheckout.UserName}, cancellationToken);
-        if (basket == null)
-        {
-            return BadRequest();
-        }
+        if (basket == null) return BadRequest();
 
         // send checkout event to rabbitmq
         var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);

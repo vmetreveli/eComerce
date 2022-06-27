@@ -7,20 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.46.0" />
-    <PackageReference Include="MassTransit" Version="8.0.3" />
-    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
-    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.3" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.46.0"/>
+    <PackageReference Include="MassTransit" Version="8.0.3"/>
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1"/>
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1"/>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.3"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1"/>
 
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj" />
-    <ProjectReference Include="..\Basket.Application\Basket.Application.csproj" />
-    <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj"/>
+    <ProjectReference Include="..\Basket.Application\Basket.Application.csproj"/>
+    <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
