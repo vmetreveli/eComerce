@@ -6,19 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Models\.DS_Store"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="2.16.0"/>
+    <PackageReference Include="MongoDB.Bson" Version="2.16.0" />
   </ItemGroup>
 
 </Project>

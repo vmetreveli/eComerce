@@ -1,10 +1,7 @@
 using Catalog.API.Middleware;
 using Catalog.Application;
 using Catalog.Application.Behaviors;
-using Catalog.Data;
-using Catalog.Data.Context;
-using Catalog.Data.Repositories;
-using Catalog.Domain.Interfaces.Repository;
+using Catalog.Infrastructure;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -17,16 +14,13 @@ public static class DependencyContainer
 {
     public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAutoMapper(typeof(Startup).Assembly);
+        // services.AddAutoMapper(typeof(Startup).Assembly);
+        services.AddAutoMapper(typeof(Startup));
 
-        services.AddMediatR(typeof(AssemblyReference).Assembly);
+        services.AddApplicationServices();
+        services.AddInfrastructureServices(configuration);
 
         services.AddControllers();
-
-        services.Configure<DatabaseSettings>(
-            configuration.GetSection("DatabaseSettings"));
-
-        services.AddScoped<ICatalogContext, CatalogContext>();
 
 
         services.AddSwaggerGen(c =>
@@ -35,19 +29,8 @@ public static class DependencyContainer
                 {Title = "Catalog.API", Version = "v1"});
         });
 
-        /* Validation */
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
-
         services.AddTransient<ExceptionHandlingMiddleware>();
 
         services.AddSerilogServices(configuration);
-
-
-        #region Repositories
-
-        services.AddScoped<IProductRepository, ProductRepository>();
-
-        #endregion
     }
 }

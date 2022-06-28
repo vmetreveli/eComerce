@@ -2,8 +2,11 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.Application.Dto;
-using Catalog.Application.Features.ProductFeatures.Commands;
+using Catalog.Application.Features.Product.Commands.CreateProduct;
+using Catalog.Application.Features.Product.Commands.DeleteProduct;
+using Catalog.Application.Features.Product.Commands.UpdateProduct;
+using Catalog.Application.Features.Product.Queries.GetProductByCategory;
+using Catalog.Application.Features.Product.Queries.GetProducts;
 using Catalog.Application.Features.ProductFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -58,10 +61,10 @@ public class CatalogController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> CreateProduct([FromBody] ProductDto product, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand product, CancellationToken cancellationToken)
     {
         var products = await _mediator.Send(
-            new CreateProductCommand {ProductDto = product}, cancellationToken);
+            product, cancellationToken);
 
         return CreatedAtRoute("GetProduct", new {id = product.Id}, product);
     }
@@ -70,9 +73,9 @@ public class CatalogController : ControllerBase
     [HttpPut]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
     public async Task<IActionResult>
-        UpdateProduct([FromBody] ProductDto product, CancellationToken cancellationToken) =>
+        UpdateProduct([FromBody] UpdateProductCommand product, CancellationToken cancellationToken) =>
         Ok(await _mediator.Send(
-            new UpdateProductCommand {ProductDto = product}, cancellationToken));
+            product, cancellationToken));
 
 
     [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
