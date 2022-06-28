@@ -27,7 +27,7 @@ public class GetProductByCategoryQueryHandler : IRequestHandler<GetProductByCate
         var product = await _productRepository.GetProductByCategory(request.Category, cancellationToken);
 
         if (!product.Any()) //throw new NotFoundException(request.Category);
-        throw new NotFoundException(nameof(Product), request.Category);
+            throw new NotFoundException(nameof(Product), request.Category);
 
         return product.Select(i => _mapper.Map<ProductVm>(i));
     }

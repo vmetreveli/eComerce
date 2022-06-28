@@ -6,8 +6,5 @@ namespace Catalog.Application.Mappings;
 
 public class MappingProfile : Profile
 {
-    public MappingProfile()
-    {
-        CreateMap<Product, ProductVm>().ReverseMap();
-    }
+    public MappingProfile() => CreateMap<Product, ProductVm>().ReverseMap();
 }

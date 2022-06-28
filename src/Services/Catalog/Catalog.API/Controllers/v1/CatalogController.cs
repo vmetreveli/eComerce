@@ -61,7 +61,8 @@ public class CatalogController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand product, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand product,
+        CancellationToken cancellationToken)
     {
         var products = await _mediator.Send(
             product, cancellationToken);

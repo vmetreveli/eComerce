@@ -2,9 +2,10 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Discount.Application.Dto;
-using Discount.Application.Features.DiscountFeatures.Commands;
-using Discount.Application.Features.DiscountFeatures.Queries;
+using Discount.Application.Features.Discount.Commands.CreateDiscount;
+using Discount.Application.Features.Discount.Commands.DeleteDiscount;
+using Discount.Application.Features.Discount.Commands.UpdateDiscount;
+using Discount.Application.Features.Discount.Queries.GetDiscount;
 using Discount.Domain.Models.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,19 +30,20 @@ public class DiscountController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(IActionResult), (int) HttpStatusCode.OK)]
-    public async Task<IActionResult> CreateDiscount([FromBody] CouponDto coupon, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateDiscount([FromBody] CreateDiscountCommand coupon,
+        CancellationToken cancellationToken)
     {
         await _mediator.Send(
-            new CreateDiscountCommand {CouponDto = coupon}, cancellationToken);
+            coupon, cancellationToken);
         return CreatedAtRoute("GetDiscount", new {productName = coupon.ProductName}, coupon);
     }
 
     [HttpPut]
-    [ProducesResponseType(typeof(CouponDto), (int) HttpStatusCode.OK)]
-    public async Task<ActionResult<Coupon>> UpdateDiscount([FromBody] CouponDto coupon,
+    [ProducesResponseType(typeof(CouponVm), (int) HttpStatusCode.OK)]
+    public async Task<ActionResult<Coupon>> UpdateDiscount([FromBody] UpdateDiscountCommand coupon,
         CancellationToken cancellationToken) =>
         Ok(await _mediator.Send(
-            new UpdateDiscountCommand {CouponDto = coupon}, cancellationToken));
+            coupon, cancellationToken));
 
 
     [HttpDelete("{productName}", Name = "DeleteDiscount")]

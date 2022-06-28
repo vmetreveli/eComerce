@@ -66,7 +66,6 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
         };
 
 
-
     private static IReadOnlyDictionary<string, string[]> GetErrors(Exception exception)
     {
         IReadOnlyDictionary<string, string[]> errors = null;

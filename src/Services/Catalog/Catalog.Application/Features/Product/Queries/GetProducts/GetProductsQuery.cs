@@ -3,6 +3,6 @@ using MediatR;
 
 namespace Catalog.Application.Features.Product.Queries.GetProducts;
 
-public class GetProductsQuery :  IRequest<List<ProductVm>>
+public class GetProductsQuery : IRequest<List<ProductVm>>
 {
 }

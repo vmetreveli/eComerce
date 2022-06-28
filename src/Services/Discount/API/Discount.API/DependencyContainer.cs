@@ -1,13 +1,11 @@
 using Discount.API.Middleware;
-using Discount.Application;
-using Discount.Application.Behaviors;
-using Discount.Data.Repositories;
 using Discount.Domain.Interfaces.Repository;
-using FluentValidation;
-using MediatR;
+using Discount.Infrastructure;
+using Discount.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Ordering.Application;
 
 namespace Discount.API;
 
@@ -15,9 +13,12 @@ public static class DependencyContainer
 {
     public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAutoMapper(typeof(Startup).Assembly);
+        services.AddApplicationServices();
+        services.AddInfrastructureServices(configuration);
 
-        services.AddMediatR(typeof(AssemblyReference).Assembly);
+        // services.AddAutoMapper(typeof(Startup).Assembly);
+        //
+        // services.AddMediatR(typeof(AssemblyReference).Assembly);
 
         services.AddControllers();
 
@@ -31,8 +32,8 @@ public static class DependencyContainer
                 {Title = "Discount.API", Version = "v1"});
         });
         /* Validation */
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
+        // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        // services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
 
         services.AddTransient<ExceptionHandlingMiddleware>();
 

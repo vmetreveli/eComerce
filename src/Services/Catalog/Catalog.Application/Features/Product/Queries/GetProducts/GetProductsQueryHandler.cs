@@ -29,8 +29,8 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<Pr
             .ToList();
 
         if (!res.Any())
-           // throw new ProductNotFoundException(string.Empty);
-            throw new NotFoundException(nameof(Product),request);
+            // throw new ProductNotFoundException(string.Empty);
+            throw new NotFoundException(nameof(Product), request);
 
         return res;
     }

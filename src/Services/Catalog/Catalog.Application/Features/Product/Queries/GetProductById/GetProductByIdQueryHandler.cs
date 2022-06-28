@@ -25,8 +25,8 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
         var product = await _productRepository.GetProductAsync(request.Id, cancellationToken);
 
         if (product == null)
-          //  throw new ProductNotFoundException(request.Id);
-            throw new NotFoundException(nameof(Product),request.Id);
+            //  throw new ProductNotFoundException(request.Id);
+            throw new NotFoundException(nameof(Product), request.Id);
 
 
         return _mapper.Map<ProductVm>(product);

@@ -1,9 +1,6 @@
 using Catalog.API.Middleware;
 using Catalog.Application;
-using Catalog.Application.Behaviors;
 using Catalog.Infrastructure;
-using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;

@@ -6,15 +6,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1"/>
-    <PackageReference Include="FluentValidation" Version="11.0.3"/>
-    <PackageReference Include="LinqKit.Core" Version="1.2.2"/>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
+    <PackageReference Include="FluentValidation" Version="11.1.0"/>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0"/>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1"/>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\DiscountFeatures\Commands\Validator"/>
+    <Folder Include="Contracts\Persistence"/>
+    <Folder Include="Features\Discount\Queries"/>
   </ItemGroup>
 
   <ItemGroup>

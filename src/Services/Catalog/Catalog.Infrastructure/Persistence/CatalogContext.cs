@@ -1,6 +1,5 @@
 using Catalog.Domain.Entities;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Persistence;
@@ -9,7 +8,6 @@ public class CatalogContext : ICatalogContext
 {
     public CatalogContext(IConfiguration configuration)
     {
-
         var client = new MongoClient(configuration.GetSection("DatabaseSettings:ConnectionString").Value);
         var database = client.GetDatabase(configuration.GetSection("DatabaseSettings:DatabaseName").Value);
 
