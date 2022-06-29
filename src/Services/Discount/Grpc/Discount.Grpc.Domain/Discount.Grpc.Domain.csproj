@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.Core.Api" Version="2.46.3"/>
+    <PackageReference Include="Grpc.Core.Api" Version="2.46.3" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,5 @@
 using Discount.Grpc.Application;
-using Discount.Grpc.Data.Repositories;
-using Discount.Grpc.Domain.Interfaces.Repository;
-using MediatR;
+using Discount.Grpc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,10 +12,9 @@ public static class DependencyContainer
         services.AddGrpc(options => { options.EnableDetailedErrors = true; });
         services.AddAutoMapper(typeof(Startup).Assembly);
 
-        services.AddMediatR(typeof(AssemblyReference).Assembly);
-
+        services.AddApplicationServices();
+        services.AddInfrastructureServices(configuration);
         services.AddControllers();
 
-        services.AddScoped<IDiscountRepository, DiscountRepository>();
     }
 }

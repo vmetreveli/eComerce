@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using Discount.Grpc.Application.Dto;
-using Discount.Grpc.Application.Features.DiscountFeatures.Commands;
-using Discount.Grpc.Application.Features.DiscountFeatures.Queries;
+using Discount.Grpc.Application.Features.Discount.Commands.DeleteDiscount;
+using Discount.Grpc.Application.Features.Discount.Commands.UpdateDiscount;
+using Discount.Grpc.Application.Features.Discount.Queries.GetDiscount;
 using Discount.Grpc.Protos;
 using Grpc.Core;
 using MediatR;
@@ -37,11 +37,11 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
 
     public override async Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
     {
-        var couponDto = _mapper.Map<CouponDto>(request.Coupon);
+        var command = _mapper.Map<UpdateDiscountCommand>(request.Coupon);
         var coupon = await _mediator.Send(
-            new UpdateDiscountCommand {CouponDto = couponDto}, context.CancellationToken);
+            command, context.CancellationToken);
 
-        _logger.LogInformation("Discount is successfully updated. ProductName : {ProductName}", couponDto.ProductName);
+        _logger.LogInformation("Discount is successfully updated. ProductName : {ProductName}", command.ProductName);
         var couponModel = _mapper.Map<CouponModel>(coupon);
         return couponModel;
     }

@@ -1,8 +1,10 @@
 using Dapper;
+using Discount.Grpc.Application.Contracts.Infrastructure;
+using Discount.Grpc.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 
-namespace Discount.Grpc.Data.Repositories;
+namespace Discount.Grpc.Infrastructure.Repositories;
 
 public class DiscountRepository : IDiscountRepository
 {
@@ -19,9 +21,9 @@ public class DiscountRepository : IDiscountRepository
             "SELECT * FROM Coupon WHERE ProductName = @ProductName",
             new {ProductName = productName}, cancellationToken: cancellationToken));
 
-        // if (coupon == null)
-        //     return new Coupon
-        //         {ProductName = "No Discount", Amount = 0, Description = "No Discount Desc"};
+        if (coupon == null)
+            return new Coupon
+                {ProductName = "No Discount", Amount = 0, Description = "No Discount Desc"};
 
         return coupon;
     }
