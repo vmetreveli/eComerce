@@ -42,7 +42,7 @@
                             <td>
                                 <img src="https://dummyimage.com/50x50/55595c/fff"/>
                             </td>
-                            <td>@cartItem.Product.Name</td>
+                            <td>@cartItem.ProductName</td>
                             <td>In stock</td>
                             <td>
                                 <input class="form-control" type="text" value="@cartItem.Quantity"/>
@@ -54,8 +54,7 @@
                                     <button class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
-                                    <input type="hidden" asp-for="@Model.Cart.Id" name="cartId"/>
-                                    <input type="hidden" asp-for="@cartItem.Id" name="cartItemId"/>
+                                    <input type="hidden" asp-for="@cartItem.ProductId" name="productId"/>
                                 </form>
 
                             </td>
