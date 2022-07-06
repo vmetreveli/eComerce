@@ -4,7 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>cd5124f0-00bb-4cff-b8b9-dc4e11396fa3</UserSecretsId>
     <LangVersion>10</LangVersion>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.0" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <Content Update="appsettings.Development.json">

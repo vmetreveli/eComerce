@@ -3,6 +3,7 @@ using Catalog.Application;
 using Catalog.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace Catalog.API;
@@ -29,5 +30,21 @@ public static class DependencyContainer
         services.AddTransient<ExceptionHandlingMiddleware>();
 
         services.AddSerilogServices(configuration);
+
+        services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.Authority = configuration.GetValue<string>("IdentityProviderBaseUrl");
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false
+                };
+            });
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("ClientIdPolicy", policy =>
+                policy.RequireClaim("client_id", "movieClient", "movies_mvc_client"));
+        });
     }
 }
