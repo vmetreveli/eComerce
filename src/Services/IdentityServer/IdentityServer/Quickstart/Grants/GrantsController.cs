@@ -2,9 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer4.Services;
@@ -41,8 +38,7 @@ public class GrantsController : Controller
     ///     Show list of grants
     /// </summary>
     [HttpGet]
-    public async Task<IActionResult> Index() =>
-        View("Index", await BuildViewModelAsync());
+    public async Task<IActionResult> Index() => View("Index", await BuildViewModelAsync());
 
     /// <summary>
     ///     Handle postback to revoke a client
@@ -62,11 +58,9 @@ public class GrantsController : Controller
         var grants = await _interaction.GetAllUserGrantsAsync();
 
         var list = new List<GrantViewModel>();
-
         foreach (var grant in grants)
         {
             var client = await _clients.FindClientByIdAsync(grant.ClientId);
-
             if (client != null)
             {
                 var resources = await _resources.FindResourcesByScopeAsync(grant.Scopes);

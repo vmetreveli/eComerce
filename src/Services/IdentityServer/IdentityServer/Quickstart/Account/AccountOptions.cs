@@ -1,10 +1,8 @@
-// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System;
-
-namespace IdentityServer.Quickstart.Account;
+namespace IdentityServerHost.Quickstart.UI;
 
 public class AccountOptions
 {
@@ -13,7 +11,7 @@ public class AccountOptions
     public static TimeSpan RememberMeLoginDuration = TimeSpan.FromDays(30);
 
     public static bool ShowLogoutPrompt = true;
-    public static bool AutomaticRedirectAfterSignOut = false;
+    public static bool AutomaticRedirectAfterSignOut = true; // set true if you want to auto redirect
 
     public static string InvalidCredentialsErrorMessage = "Invalid username or password";
 }

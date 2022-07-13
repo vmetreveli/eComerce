@@ -4,7 +4,7 @@
 
 using IdentityServer4.Models;
 
-namespace IdentityServer.Quickstart.Consent;
+namespace IdentityServerHost.Quickstart.UI;
 
 public class ProcessConsentResult
 {

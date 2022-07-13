@@ -2,13 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Threading.Tasks;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace IdentityServerHost.Quickstart.UI;
 
@@ -47,7 +43,6 @@ public class HomeController : Controller
 
         // retrieve error details from identityserver
         var message = await _interaction.GetErrorContextAsync(errorId);
-
         if (message != null)
         {
             vm.Error = message;

@@ -2,21 +2,16 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using IdentityServer4;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Validation;
-using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace IdentityServer.Quickstart.Consent;
+namespace IdentityServerHost.Quickstart.UI;
 
 /// <summary>
 ///     This controller processes the consent UI
@@ -65,7 +60,6 @@ public class ConsentController : Controller
         if (result.IsRedirect)
         {
             var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
-
             if (context?.IsNativeClient() == true)
                 // The client is native, so this change in how to
                 // return the response is for better UX for the end user.
@@ -110,10 +104,8 @@ public class ConsentController : Controller
             if (model.ScopesConsented != null && model.ScopesConsented.Any())
             {
                 var scopes = model.ScopesConsented;
-
                 if (ConsentOptions.EnableOfflineAccess == false)
-                    scopes = scopes.Where(x =>
-                        x != IdentityServerConstants.StandardScopes.OfflineAccess);
+                    scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
 
                 grantedConsent = new ConsentResponse
                 {
@@ -152,10 +144,8 @@ public class ConsentController : Controller
     private async Task<ConsentViewModel> BuildViewModelAsync(string returnUrl, ConsentInputModel model = null)
     {
         var request = await _interaction.GetAuthorizationContextAsync(returnUrl);
-
         if (request != null)
             return CreateConsentViewModel(model, returnUrl, request);
-
         _logger.LogError("No consent request matching request: {0}", returnUrl);
 
         return null;
@@ -179,29 +169,24 @@ public class ConsentController : Controller
             AllowRememberConsent = request.Client.AllowRememberConsent
         };
 
-        vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources.Select(x =>
-            CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
+        vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources
+            .Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
 
         var apiScopes = new List<ScopeViewModel>();
-
         foreach (var parsedScope in request.ValidatedResources.ParsedScopes)
         {
             var apiScope = request.ValidatedResources.Resources.FindApiScope(parsedScope.ParsedName);
-
             if (apiScope != null)
             {
                 var scopeVm = CreateScopeViewModel(parsedScope, apiScope,
                     vm.ScopesConsented.Contains(parsedScope.RawValue) || model == null);
-
                 apiScopes.Add(scopeVm);
             }
         }
 
         if (ConsentOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
             apiScopes.Add(GetOfflineAccessScope(
-                vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) ||
-                model == null));
-
+                vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) || model == null));
         vm.ApiScopes = apiScopes;
 
         return vm;

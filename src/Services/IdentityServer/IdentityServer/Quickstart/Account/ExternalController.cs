@@ -1,22 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
-using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace IdentityServer.Quickstart.Account;
+namespace IdentityServerHost.Quickstart.UI;
 
 [SecurityHeaders]
 [AllowAnonymous]
@@ -58,7 +51,7 @@ public class ExternalController : Controller
             // user might have clicked on a malicious link - should be logged
             throw new Exception("invalid return URL");
 
-        // start challenge and roundtrip the return URL and scheme
+        // start challenge and roundtrip the return URL and scheme 
         var props = new AuthenticationProperties
         {
             RedirectUri = Url.Action(nameof(Callback)),
@@ -79,9 +72,7 @@ public class ExternalController : Controller
     public async Task<IActionResult> Callback()
     {
         // read external identity from the temporary cookie
-        var result =
-            await HttpContext.AuthenticateAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
-
+        var result = await HttpContext.AuthenticateAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
         if (result?.Succeeded != true) throw new Exception("External authentication error");
 
         if (_logger.IsEnabled(LogLevel.Debug))
@@ -92,7 +83,6 @@ public class ExternalController : Controller
 
         // lookup our user and external provider info
         var (user, provider, providerUserId, claims) = FindUserFromExternalProvider(result);
-
         if (user == null)
             // this might be where you might initiate a custom workflow for user registration
             // in this sample we don't show how that would be done, as our sample implementation
@@ -124,7 +114,6 @@ public class ExternalController : Controller
 
         // check if external login is in the context of an OIDC request
         var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-
         await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.SubjectId, user.Username,
             true, context?.Client.ClientId));
 
@@ -180,7 +169,6 @@ public class ExternalController : Controller
 
         // if the external provider issued an id_token, we'll keep it for signout
         var idToken = externalResult.Properties.GetTokenValue("id_token");
-
         if (idToken != null)
             localSignInProps.StoreTokens(new[] {new AuthenticationToken {Name = "id_token", Value = idToken}});
     }

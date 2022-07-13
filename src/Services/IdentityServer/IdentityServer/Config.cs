@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Collections.Generic;
 using IdentityServer4;
 using IdentityServer4.Models;
 
@@ -29,6 +28,13 @@ public static class Config
                 // {
                 //     "role"
                 // }
+            },
+            new ApiResource("movieAPI", "Movie API")
+            {
+                Scopes = new List<string>
+                {
+                    "role"
+                }
             }
         };
 
@@ -49,7 +55,8 @@ public static class Config
         {
             new("HandbookAPI.read"),
             new("HandbookAPI.write"),
-            new("HandbookAPI")
+            new("HandbookAPI"),
+            new("movieAPI")
         };
 
 
@@ -102,6 +109,48 @@ public static class Config
                 {
                     GrantType.ResourceOwnerPassword
                 }
+            },
+            new Client
+            {
+                ClientId = "movieClient",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("secret".Sha256())
+                },
+                AllowedScopes = {"movieAPI"}
+            },
+            new Client
+            {
+                ClientId = "movies_mvc_client",
+                ClientName = "Movies MVC Web App",
+                AllowedGrantTypes = new[]
+                {
+                    GrantType.Hybrid
+                },
+                RequirePkce = false,
+                AllowRememberConsent = false,
+                RedirectUris = new List<string>
+                {
+                    "https://localhost:9801/signin-oidc"
+                },
+                PostLogoutRedirectUris = new List<string>
+                {
+                    "https://localhost:9801/signout-callback-oidc"
+                },
+                ClientSecrets = new List<Secret>
+                {
+                    new("secret".Sha256())
+                },
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    // IdentityServerConstants.StandardScopes.Address,
+                    // IdentityServerConstants.StandardScopes.Email,
+                    "movieAPI"
+                },
+                AllowOfflineAccess = true
             }
         };
 }

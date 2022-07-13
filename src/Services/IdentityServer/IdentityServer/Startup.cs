@@ -3,14 +3,8 @@
 
 
 using IdentityServer.Data;
-using IdentityServerHost.Quickstart.UI;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace IdentityServer;
 
@@ -63,7 +57,7 @@ public class Startup
                 // options.EmitStaticAudienceClaim = true;
             })
             .AddAspNetIdentity<IdentityUser>()
-            .AddTestUsers(TestUsers.Users)
+            //.AddTestUsers(TestUsers.Users)
             // this adds the config data from DB (clients, resources, CORS)
             .AddConfigurationStore(options =>
             {

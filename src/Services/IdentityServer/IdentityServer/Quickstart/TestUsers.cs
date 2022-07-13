@@ -1,8 +1,7 @@
-// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.Json;
 using IdentityModel;
@@ -31,7 +30,7 @@ public class TestUsers
                 {
                     SubjectId = "818727",
                     Username = "alice",
-                    Password = "alice",
+                    Password = "a1",
                     Claims =
                     {
                         new Claim(JwtClaimTypes.Name, "Alice Smith"),
@@ -41,14 +40,15 @@ public class TestUsers
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                         new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
                         new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address),
-                            IdentityServerConstants.ClaimValueTypes.Json)
+                            IdentityServerConstants.ClaimValueTypes.Json),
+                        new Claim(JwtClaimTypes.Role, "user")
                     }
                 },
                 new()
                 {
                     SubjectId = "88421113",
                     Username = "bob",
-                    Password = "bob",
+                    Password = "b1",
                     Claims =
                     {
                         new Claim(JwtClaimTypes.Name, "Bob Smith"),
@@ -58,7 +58,8 @@ public class TestUsers
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                         new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
                         new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address),
-                            IdentityServerConstants.ClaimValueTypes.Json)
+                            IdentityServerConstants.ClaimValueTypes.Json),
+                        new Claim(JwtClaimTypes.Role, "admin")
                     }
                 }
             };

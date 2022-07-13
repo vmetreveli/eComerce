@@ -24,8 +24,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddHttpClient<ICatalogService, CatalogService>(c =>
-            c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
+        services.AddScoped<ICatalogService, CatalogService>();//c =>
+           // c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
         services.AddHttpClient<IBasketService, BasketService>(c =>
             c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
         services.AddHttpClient<IOrderService, OrderService>(c =>
@@ -48,7 +48,8 @@ public class Startup
             // 2 create an HttpClient used for accessing the IDP
             services.AddHttpClient("IDPClient", client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5005/");
+                //IdentityServer
+                client.BaseAddress = new Uri("https://localhost:7145/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
             });
@@ -74,7 +75,7 @@ public class Startup
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
-                    options.Authority = "https://localhost:5005";
+                    options.Authority = "https://localhost:7145";
 
                     options.ClientId = "movies_mvc_client";
                     options.ClientSecret = "secret";
@@ -82,8 +83,8 @@ public class Startup
 
                     //options.Scope.Add("openid");
                     //options.Scope.Add("profile");
-                    options.Scope.Add("address");
-                    options.Scope.Add("email");
+                    // options.Scope.Add("address");
+                    // options.Scope.Add("email");
                     options.Scope.Add("roles");
 
                     options.ClaimActions.DeleteClaim("sid");

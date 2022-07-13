@@ -2,11 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer.Quickstart.Consent;
 using IdentityServer4;
 using IdentityServer4.Configuration;
 using IdentityServer4.Events;
@@ -16,7 +11,6 @@ using IdentityServer4.Services;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace IdentityServerHost.Quickstart.UI;
@@ -103,10 +97,8 @@ public class DeviceController : Controller
             if (model.ScopesConsented != null && model.ScopesConsented.Any())
             {
                 var scopes = model.ScopesConsented;
-
                 if (ConsentOptions.EnableOfflineAccess == false)
-                    scopes = scopes.Where(x =>
-                        x != IdentityServerConstants.StandardScopes.OfflineAccess);
+                    scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
 
                 grantedConsent = new ConsentResponse
                 {
@@ -151,8 +143,8 @@ public class DeviceController : Controller
         return null;
     }
 
-    private DeviceAuthorizationViewModel CreateConsentViewModel(string userCode,
-        DeviceAuthorizationInputModel model, DeviceFlowAuthorizationRequest request)
+    private DeviceAuthorizationViewModel CreateConsentViewModel(string userCode, DeviceAuthorizationInputModel model,
+        DeviceFlowAuthorizationRequest request)
     {
         var vm = new DeviceAuthorizationViewModel
         {
@@ -168,36 +160,31 @@ public class DeviceController : Controller
             AllowRememberConsent = request.Client.AllowRememberConsent
         };
 
-        vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources.Select(x =>
-            CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
+        vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources
+            .Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
 
         var apiScopes = new List<ScopeViewModel>();
-
         foreach (var parsedScope in request.ValidatedResources.ParsedScopes)
         {
             var apiScope = request.ValidatedResources.Resources.FindApiScope(parsedScope.ParsedName);
-
             if (apiScope != null)
             {
                 var scopeVm = CreateScopeViewModel(parsedScope, apiScope,
                     vm.ScopesConsented.Contains(parsedScope.RawValue) || model == null);
-
                 apiScopes.Add(scopeVm);
             }
         }
 
         if (ConsentOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
             apiScopes.Add(GetOfflineAccessScope(
-                vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) ||
-                model == null));
-
+                vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) || model == null));
         vm.ApiScopes = apiScopes;
 
         return vm;
     }
 
     private ScopeViewModel CreateScopeViewModel(IdentityResource identity, bool check) =>
-        new()
+        new ScopeViewModel
         {
             Value = identity.Name,
             DisplayName = identity.DisplayName ?? identity.Name,
@@ -208,7 +195,7 @@ public class DeviceController : Controller
         };
 
     public ScopeViewModel CreateScopeViewModel(ParsedScopeValue parsedScopeValue, ApiScope apiScope, bool check) =>
-        new()
+        new ScopeViewModel
         {
             Value = parsedScopeValue.RawValue,
             // todo: use the parsed scope value in the display?
@@ -220,7 +207,7 @@ public class DeviceController : Controller
         };
 
     private ScopeViewModel GetOfflineAccessScope(bool check) =>
-        new()
+        new ScopeViewModel
         {
             Value = IdentityServerConstants.StandardScopes.OfflineAccess,
             DisplayName = ConsentOptions.OfflineAccessDisplayName,

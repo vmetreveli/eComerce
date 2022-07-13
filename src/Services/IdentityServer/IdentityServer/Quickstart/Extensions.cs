@@ -1,9 +1,7 @@
-using System;
-using IdentityServer.Quickstart.Account;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServer.Quickstart;
+namespace IdentityServerHost.Quickstart.UI;
 
 public static class Extensions
 {
@@ -12,8 +10,8 @@ public static class Extensions
     /// </summary>
     /// <returns></returns>
     public static bool IsNativeClient(this AuthorizationRequest context) =>
-        !context.RedirectUri.StartsWith("https", StringComparison.Ordinal) &&
-        !context.RedirectUri.StartsWith("http", StringComparison.Ordinal);
+        !context.RedirectUri.StartsWith("https", StringComparison.Ordinal)
+        && !context.RedirectUri.StartsWith("http", StringComparison.Ordinal);
 
     public static IActionResult LoadingPage(this Controller controller, string viewName, string redirectUri)
     {
