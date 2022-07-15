@@ -24,6 +24,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllersWithViews();
+
         services.AddScoped<ICatalogService, CatalogService>();//c =>
            // c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
         services.AddHttpClient<IBasketService, BasketService>(c =>
@@ -125,7 +127,9 @@ public class Startup
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
+
 
         app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
     }

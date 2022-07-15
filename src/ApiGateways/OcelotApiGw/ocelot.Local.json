@@ -39,9 +39,9 @@
         "DELETE"
       ],
       "AuthenticationOptions": {
-      "AuthenticationProviderKey": "IdentityApiKey",
-      "AllowedScopes": []
-    }
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductByCategory/{category}",
